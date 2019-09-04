@@ -1,5 +1,6 @@
-body {
+* {
   margin: 2px;
+  font-family: 'Black Ops One', cursive;
 }
 header, footer {
   height: 10vh;
@@ -8,13 +9,25 @@ header, footer {
   background-color: burlywood;
   display: table;
 }
+.title {
+  background-image: url('images/logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
 button {
   padding: 20px;
-  background-color: darkred;
+  background-color: rgb(139, 0, 0, 0.5);
   color: white;
-  border: 1px dotted black;
+  border: 2px dotted black;
   border-radius: 20px;
   font-size: 100%;
+}
+button:hover {
+  transition: 300ms;
+  transform: scale(1.1);
+  border: 2px solid gold;
+  background-color: rgb(139, 0, 0);
 }
 .roundNumber, .title, .playerTurn {
   display: table-cell;
@@ -27,6 +40,12 @@ button {
 }
 
 /* Game Area */
+.player1 > *, .player2 > * {
+  border: 2px solid burlywood;
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.5));
+  border-radius: 20px;
+    text-shadow: 2px 2px 2px black;
+}
 
 .gameArea {
   height: 80vh;
@@ -43,6 +62,55 @@ button {
   text-align: center;
   vertical-align: middle;
   font-size: 150%;
+  background-repeat: 'no-repeat';
+  background-size: cover;
+  background-position: center;
+}
+.player1 {
+  background-image: url('images/player1.jpg');
+}
+.buttonContainer {
+  background-image: url('images/buttoncontainer.jpg');
+}
+.player2 {
+  background-image: url('images/player2.jpg');
+}
+.yourTurn {
+  border: 8px double gold;
+}
+.playerName {
+  color:white;
+}
+.points {
+  color: gold;
+}
+.gems {
+  color: white;
+}
+.topaz {
+  color: #ffc87c;
+}
+.amethyst {
+  color: #9966cc;
+}
+.emerald {
+  color: #50c878;
+}
+.sapphire {
+  color: #082567;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: lightgrey;
+}
+.ruby {
+  color: #e0115F;
+}
+.diamond {
+  color: #b9f2ff;
+}
+.obsidian {
+  color: #343637;
+    -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: lightgrey;
 }
 
 /* footer */
