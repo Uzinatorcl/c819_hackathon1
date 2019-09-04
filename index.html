@@ -12,6 +12,37 @@
 
 </head>
 <body>
+  <div id="rulesModal" class="rules hidden">
+    <!-- Modal content -->
+    <div class="rules-content">
+      <h1>Welcome to GemStone Mining!</h1>
+      <p>Collect gems and beat your opponent in points!</p>
+      <p>But be careful not to get two obsidian gems</p>
+      <p>Or you will lose your gems and be kicked out of the mine</p>
+      <p>Here is the chart for how much each gem is worth!</p>
+      <p>Topaz = 1</p>
+      <p>Amethyst = 2</p>
+      <p>Emerald = 3</p>
+      <p>Sapphire = 4</p>
+      <p>Ruby = 6</p>
+      <p>Diamond = 8</p>
+      <p>Obsidian = 0</p>
+      <button class="close-rules">Close Rules</button>
+    </div>
+
+  </div>
+
+    <div id="winModal" class="winner hidden">
+      <!-- Modal content -->
+      <div class="winner-content">
+        <h1 class="winningPlayer">Player 0</h1>
+        <p>CONGRATULATIONS</p>
+        <p>YOU WIN!</p>
+        <button class="restart-game">Restart Game</button>
+      </div>
+
+    </div>
+
   <header>
     <div class="roundNumber">Round 1</div>
     <div class="title"></div>
@@ -47,6 +78,6 @@
       <p class="obsidian">Obsidian: 0</p>
     </div>
   </div>
-  <footer><button class="rules">Rules</button></footer>
+  <footer><button class="rulesButton">Rules</button></footer>
 </body>
 </html>

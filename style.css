@@ -70,7 +70,7 @@ button:hover {
   background-image: url('images/player1.jpg');
 }
 .buttonContainer {
-  background-image: url('images/buttoncontainer.jpg');
+  background-image: url('images/mines.gif');
 }
 .player2 {
   background-image: url('images/player2.jpg');
@@ -118,4 +118,60 @@ button:hover {
 footer {
   text-align: center;
   vertical-align: middle;
+}
+
+/* modal */
+
+.hidden {
+  display: none;
+}
+
+.rules, .winner{
+  position: fixed;
+  z-index: 1;
+  width: 50%;
+  height: 75%;
+  overflow: auto;
+  background-color: white;
+  border: 4px double black;
+  margin: 0 auto;
+  left: 25%;
+  top: 15%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-size: 120%;
+  text-shadow: 3px 3px 3px black;
+  text-align: center;
+}
+.rules-content, .winner-content {
+  vertical-align: middle;
+}
+.rules {
+  background-image: url('images/rules-background.jpg');
+}
+.winner {
+  background-image: url('images/winner.gif');
+}
+
+/* leaving mine and accident classes */
+
+.leftMine:before {
+  content: 'LEFT MINE';
+  font-size: 200%;
+  color: lightgreen;
+  text-shadow: 5px 5px 5px black;
+}
+
+.accident > * {
+color: darkgray;
+}
+.accident:before {
+  content: 'ACCIDENT';
+  font-size: 200%;
+  color: red;
+  text-shadow: 5px 5px 5px black;
 }

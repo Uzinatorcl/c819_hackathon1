@@ -24,7 +24,6 @@ class Mine {
   }
 
   mineTwoGems() {
-    debugger;
     var gems = [];
     var gem1 = this.returnRandomGem();
     var gem2 = this.returnRandomGem();
