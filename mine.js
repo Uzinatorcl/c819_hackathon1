@@ -24,8 +24,17 @@ class Mine {
   }
 
   mineTwoGems() {
+    debugger;
     var gems = [];
-    gems.push(this.returnRandomGem(), this.returnRandomGem());
+    var gem1 = this.returnRandomGem();
+    var gem2 = this.returnRandomGem();
+    if (gem1 === "obsidian"){
+      while(gem2 === "obsidian"){
+        this.globalGemArray.push(gem2);
+        gem2 = this.returnRandomGem();
+      }
+    }
+    gems.push(gem1, gem2);
     return gems;
-  }
+}
 }
