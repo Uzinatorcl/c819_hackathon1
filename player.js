@@ -1,6 +1,6 @@
-class Player {
-  constructor(playerName) {
-    //The player name that is being passed in will be the class name of the player on the dom aka '.player1' '.player2'
+class Player{
+  constructor(playerName){
+      //The player name that is being passed in will be the class name of the player on the dom aka '.player1' '.player2'
     this.playerName = $(playerName);
     this.points = 0;
     this.gems = {
@@ -13,4 +13,30 @@ class Player {
       'obsidian' : 0
     }
   }
+
+  render(){
+    // create and set all dom elements for player
+  }
+
+  takeTurn( mineOrLeave ){
+    // this.mine() or this.leaveMine()
+  }
+
+  mine(){
+    // mine.mineGems(); mine for 2 gems
+    // if one or more gems
+  }
+
+  leaveMine(){
+    // this.inMine = false;
+  }
+
+  points(){
+    // loops through array add up each
+    // returns the total points by combining the values of all the gems mined
+  }
+
+  // useCard(){
+  //
+  //}
 }
