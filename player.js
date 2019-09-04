@@ -1,4 +1,4 @@
-class Player = {
+class Player {
   constructor(playerName) {
     //The player name that is being passed in will be the class name of the player on the dom aka '.player1' '.player2'
     this.playerName = $(playerName);
