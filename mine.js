@@ -36,4 +36,10 @@ class Mine {
     gems.push(gem1, gem2);
     return gems;
 }
+
+returnPlayerGemsToMine (gemArray) {
+  for (var indexOfGemArray = 0; indexOfGemArray < gemArray.length; indexOfGemArray++) {
+    this.globalGemArray.push(gemArray[indexOfGemArray]);
+  }
+}
 }
