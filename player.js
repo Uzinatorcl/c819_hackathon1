@@ -22,6 +22,7 @@ class Player{
       'obsidian': 0
     }
     this.inMine = true;
+    this.hadAccident = false;
   }
 
   render(){
@@ -35,29 +36,37 @@ class Player{
   mine(mineObject){
     // mine.mineGems(); mine for 2 gems
     // if one or more gems
-    console.log(this.gems);
+    //console.log(this.gems);
     var minedGems = mineObject.mineTwoGems();
     for(var mgIndex = 0; mgIndex < minedGems.length; mgIndex++) {
       this.gems[minedGems[mgIndex]]++;
       }
-      console.log(this.gems);
+      //console.log(this.gems);
       this.pointsConverter(minedGems);
       return minedGems;
     }
 
 
   leaveMine() {
-    // this.inMine = false;
+    this.inMine = false;
+  }
+
+  hasAccident(){
+    this.hadAccident = true;
   }
 
   pointsConverter(minedGems){
-    console.log(this.points)
+    //console.log(this.points)
     for(var i = 0; i < minedGems.length; i++) {
       this.points += this.pointChart[minedGems[i]]
     }
-    console.log(this.points)
+    //console.log(this.points)
     // loops through array add up each
     // returns the total points by combining the values of all the gems mined
+  }
+
+  getPoints(){
+    return this.points;
   }
 
   // useCard(){
