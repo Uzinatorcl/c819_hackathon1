@@ -6,13 +6,14 @@ class Gameboard{
     this.playerTurnIndex = 0;
     this.mineGemClick = this.mineGemClick.bind(this);
     this.leaveMineClick = this.leaveMineClick.bind(this);
+    this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
+    this.round = 1;
     this.domElements = {
       // round number
       // player turn
       // player stats
       // rules
     }
-
   }
 
   initializeBoard(){
@@ -26,6 +27,9 @@ class Gameboard{
     this.createMine();
     $(".buttonContainer").on("click", ".mineGems", this.mineGemClick);
     $(".buttonContainer").on("click", ".leaveMine", this.leaveMineClick);
+    $(".rulesButton").on("click", function(){$(".rules").toggleClass("hidden")});
+    $(".close-rules").on("click", function(){$(".rules").toggleClass("hidden")});
+
   }
 
   createPlayer(){
@@ -38,27 +42,17 @@ class Gameboard{
   }
 
   createMine(){
-    // create new Mine
     // append mine dom elements
     this.gemMine = new Mine;
   }
 
-  playerTurn(){
-    // display screen for selected player's turn if player.inMine is true
-    // update board
-  }
-
-  mineGemClick( ){
+  mineGemClick(){
     console.log("player " + (this.playerTurnIndex + 1) + " is mining for gems");
     // get gems from this.gemMine
     var player = this.currentPlayer();
     var gemsMined = player.mine(this.gemMine);
     if (player.gems["obsidian"] === 2){
-      player.hasAccident();
-      // put back all gems into mine
-      this.updatePlayerGems(player, gemsMined);
-      this.updatePlayerPoints(player);
-      this.leaveMineClick();
+      this.playerAccident(player);
       return;
     }
     this.updatePlayerGems(player, gemsMined);
@@ -66,10 +60,11 @@ class Gameboard{
     this.nextPlayerTurn();
   }
 
-  leaveMineClick( ){
+  leaveMineClick(){
     console.log("player " + (this.playerTurnIndex + 1) + " has left the mine");
     this.players[this.playerTurnIndex].leaveMine();
-    this.updatePlayerStatus( this.players[this.playerTurnIndex] );
+    this.currentPlayer().playerDom.toggleClass("leftMine");
+    //this.updatePlayerStatus( this.players[this.playerTurnIndex] );
     if(!this.checkIfEveryoneLeftMine()){
       this.nextPlayerTurn();
     } else {
@@ -77,27 +72,36 @@ class Gameboard{
     }
   }
 
+  playerAccident(player){
+    player.hasAccident();
+    player.playerDom.toggleClass("accident");
+    player.returnGems(this.gemMine);
+    this.updatePlayerGems(player, this.typeOfGems);
+    this.updatePlayerPoints(player);
+    this.leaveMineClick();
+  }
+
   nextPlayerTurn(){
-    this.players[this.playerTurnIndex].playerName.toggleClass("yourTurn");
+    this.players[this.playerTurnIndex].playerDom.toggleClass("yourTurn");
     if (this.playerTurnIndex === this.players.length - 1){
       this.playerTurnIndex = 0;
     } else {
       this.playerTurnIndex++;
     }
-    this.players[this.playerTurnIndex].playerName.toggleClass("yourTurn");
+    this.players[this.playerTurnIndex].playerDom.toggleClass("yourTurn");
     var newPlayerTurnText = "Player Turn: Player " + (this.playerTurnIndex + 1);
     $(".playerTurn").text(newPlayerTurnText);
     if (!this.players[this.playerTurnIndex].inMine){
       this.nextPlayerTurn();
     }
-    console.log(this.players[this.playerTurnIndex].playerName.attr("class"));
+    console.log(this.players[this.playerTurnIndex].playerDom.attr("class"));
   }
 
   updatePlayerGems( player, newGems ){
     // update DOM to show player's current gem count
     for (var gemIndex = 0; gemIndex < 2; gemIndex++){
-      //var playerClass = $(player.playerName).attr("class");
-      var gemElement = $(player.playerName).children("." + newGems[gemIndex]);
+      //var playerClass = $(player.playerDom).attr("class");
+      var gemElement = $(player.playerDom).children("." + newGems[gemIndex]);
       var newGemCount = player.gems[newGems[gemIndex]];
       gemElement.text(newGems[gemIndex].charAt(0).toUpperCase() + newGems[gemIndex].slice(1) + ": " + newGemCount);
     }
@@ -105,14 +109,8 @@ class Gameboard{
 
   updatePlayerPoints( player ){
     // update DOM to show player's current point total
-    var pointsElement = $(player.playerName).children(".points");
+    var pointsElement = $(player.playerDom).children(".points");
     pointsElement.text("Points: " + player.getPoints());
-  }
-
-  updatePlayerStatus( player ){
-    // update player
-    //player.playerName.addClass("accident");
-
   }
 
   checkIfEveryoneLeftMine(){
@@ -122,10 +120,6 @@ class Gameboard{
       }
     }
     return true;
-  }
-
-  updateBoard(){
-    // update dom elements to display the most current gem totals/player stats
   }
 
   currentPlayer(){
@@ -140,8 +134,23 @@ class Gameboard{
         winner = this.players[playerIndex];
       }
     }
-    console.log(winner.playerName.attr("class") + " is the winner!");
+    $("winner").toggleClass("hidden");
+    $("winningPlayer").text(winner.playerDom.attr("class"));
+    console.log(winner.playerDom.attr("class") + " is the winner!");
   }
 
+// updatePlayerStatus( player ){
+  //   // update player
+  //   //player.playerDom.addClass("accident");
 
+  // }
+
+   // updateBoard(){
+  //   // update dom elements to display the most current gem totals/player stats
+  // }
+
+ // playerTurn(){
+  //   // display screen for selected player's turn if player.inMine is true
+  //   // update board
+  // }
 }
