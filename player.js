@@ -12,6 +12,16 @@ class Player{
       'diamond' : 0,
       'obsidian' : 0
     }
+    this.pointChart = {
+      'topaz': 1,
+      'amethyst': 2,
+      'emerald': 3,
+      'sapphire': 4,
+      'ruby': 6,
+      'diamond': 8,
+      'obsidian': 0
+    }
+    this.inMine = true;
   }
 
   render(){
@@ -22,16 +32,30 @@ class Player{
     // this.mine() or this.leaveMine()
   }
 
-  mine(){
+  mine(mineObject){
     // mine.mineGems(); mine for 2 gems
     // if one or more gems
-  }
+    console.log(this.gems);
+    var minedGems = mineObject.mineTwoGems();
+    for(var mgIndex = 0; mgIndex < minedGems.length; mgIndex++) {
+      this.gems[minedGems[mgIndex]]++;
+      }
+      console.log(this.gems);
+      this.pointsConverter(minedGems);
+      return minedGems;
+    }
 
-  leaveMine(){
+
+  leaveMine() {
     // this.inMine = false;
   }
 
-  points(){
+  pointsConverter(minedGems){
+    console.log(this.points)
+    for(var i = 0; i < minedGems.length; i++) {
+      this.points += this.pointChart[minedGems[i]]
+    }
+    console.log(this.points)
     // loops through array add up each
     // returns the total points by combining the values of all the gems mined
   }
