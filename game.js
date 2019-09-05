@@ -9,7 +9,7 @@ class Gameboard {
     this.restartGameClick = this.restartGameClick.bind(this);
     this.createPlayer = this.createPlayer.bind(this);
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
-    this.round = 1;
+    this.round = 0;
     this.domElements = {
     }
   }
@@ -25,7 +25,18 @@ class Gameboard {
     $('.playerContainer').on('click', '.player', this.playerClick);
   }
 
-
+  roundChange() {
+    if(this.round <= 4) {
+    var currentRound = this.round.toString();
+    this.round++
+    var nextRound = this.round.toString();
+    var newRound = $('.roundNumber').text().replace(currentRound, nextRound);
+    $('.roundNumber').text(newRound);
+    } else {
+      this.round = 1;
+      $('.roundNumber').text($('.roundNumber').text().replace('5','1'))
+    }
+  }
 
   createPlayer(event) {
     var numberOfPlayers = parseInt(event.currentTarget.innerText);
@@ -33,6 +44,7 @@ class Gameboard {
     for(var i = 1; i <= numberOfPlayers; i++) {
         this.players.push(new Player(i));
     }
+    this.roundChange();
     this.cloneAndAppend();
   }
 
@@ -83,11 +95,11 @@ class Gameboard {
   cloneAndAppend(){
     this.playerTurnDom.empty();
     this.currentPlayer().playerDom.clone().appendTo(this.playerTurnDom);
-    this.currentPlayer().playerDom.toggleClass("yourTurn");
+    this.currentPlayer().playerDom.addClass("yourTurn");
   }
 
   nextPlayerTurn() {
-    this.currentPlayer().playerDom.toggleClass("yourTurn");
+    this.currentPlayer().playerDom.removeClass("yourTurn");
     if (this.playerTurnIndex === this.players.length - 1) {
       this.playerTurnIndex = 0;
     } else {
@@ -124,27 +136,52 @@ class Gameboard {
 
   gameOver() {
     var winner = this.players[0];
+    var gameWinner = this.players[0];
     for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
       if (this.players[playerIndex].getPoints() > winner.getPoints()) {
         winner = this.players[playerIndex];
       }
     }
-    $(".winner").toggleClass("hidden");
+    // debugger;
+    if(this.round <= 4) {
     $(".winningPlayer").text(winner.playerName);
+      $('.winningMessage').text('You Win This Round!');
+      $('.restart-game').text('Next Round');
+    $(".winner").toggleClass("hidden");
+
     console.log(winner.playerDom.attr("class") + " is the winner!");
+    } else {
+      for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
+        if (this.players[playerIndex].getTotalPoints() > gameWinner.getTotalPoints()) {
+          gameWinner = this.players[playerIndex];
+        }
+      }
+      $(".winningPlayer").text(gameWinner.playerName);
+      $('.winningMessage').text('You Win! Your Total Points ' + gameWinner.getTotalPoints());
+      $('.restart-game').text('Thanks for playing!');
+      $(".winner").toggleClass("hidden");
+      for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
+        this.players[playerIndex].totalPoints = 0;
+      }
+    }
   }
 
   restartGameClick() {
     for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
+      if(this.round != 5) {
+        this.players[playerIndex].totalPoints += this.players[playerIndex].points;
+      }
       this.players[playerIndex].returnGems(this.gemMine);
       this.updatePlayerGems(this.players[playerIndex], this.typeOfGems);
       this.players[playerIndex].playerDom.removeClass('accident yourTurn leftMine');
       this.players[playerIndex].inMine = true;
       this.players[playerIndex].hadAccident = false;
     }
-    this.playerTurnIndex = 0;
+    this.playerTurnIndex = this.players.length - 1;
+    this.nextPlayerTurn();
+    this.roundChange();
     $('.winner').toggleClass('hidden');
     this.cloneAndAppend();
-  }
+}
 
 }

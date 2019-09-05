@@ -18,6 +18,7 @@ class Player{
     }
     this.playerName = "Player " + playerNumber;
     this.points = 0;
+    this.totalPoints = 0;
     this.gems = {
       'topaz': 0,
       'amethyst': 0,
@@ -127,6 +128,9 @@ class Player{
 
   getPoints() {
     return this.points;
+  }
+  getTotalPoints() {
+    return this.totalPoints;
   }
 
   returnGems(mine) {
