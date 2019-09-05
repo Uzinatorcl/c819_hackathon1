@@ -42,7 +42,6 @@ class Gameboard {
 
   mineGemClick() {
     console.log("player " + (this.playerTurnIndex + 1) + " is mining for gems");
-    // get gems from this.gemMine
     var player = this.currentPlayer();
     var gemsMined = player.mine(this.gemMine);
     if (player.gems["obsidian"] === 2) {
@@ -50,7 +49,6 @@ class Gameboard {
       return;
     }
     this.updatePlayerGems(player, gemsMined);
-    // this.updatePlayerPoints(player);
     this.nextPlayerTurn();
   }
 
@@ -104,21 +102,12 @@ class Gameboard {
   }
 
   updatePlayerGems(player, newGems) {
-    // update DOM to show player's current gem count
     for (var gemIndex = 0; gemIndex < newGems.length; gemIndex++) {
-      //player.updateGemCount(newGems[gemIndex], 1);
       var gemElement = $(player.playerDom).children("." + newGems[gemIndex]);
       var newGemCount = player.gems[newGems[gemIndex]];
       gemElement.text(newGems[gemIndex].charAt(0).toUpperCase() + newGems[gemIndex].slice(1) + ": " + newGemCount);
     }
   }
-
-  // updatePlayerPoints(player) {
-  //   // update DOM to show player's current point total
-
-  //   // var pointsElement = player.playerDom.children(".points");
-  //   // pointsElement.text("Points: " + player.getPoints());
-  // }
 
   checkIfEveryoneLeftMine() {
     for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
@@ -134,7 +123,6 @@ class Gameboard {
   }
 
   gameOver() {
-    // get total points of each player
     var winner = this.players[0];
     for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
       if (this.players[playerIndex].getPoints() > winner.getPoints()) {
