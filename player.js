@@ -1,7 +1,8 @@
 class Player{
-  constructor(playerDom){
+  constructor(playerDom, playerName){
       //The player name that is being passed in will be the class name of the player on the dom aka '.player1' '.player2'
     this.playerDom = $(playerDom);
+    this.playerName = playerName;
     this.points = 0;
     this.gems = {
       'topaz': 0,
