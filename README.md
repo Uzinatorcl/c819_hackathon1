@@ -7,6 +7,23 @@
 - base your branches off the dev branch
 - make sure to make a figma and supply the link to the figma in this readme at the top.
 
+Proper steps for branching / merging
+- start from dev
+- maker a feature branch named after the feature you are working on
+- add/commit/push often
+- after done with feature, make a pull request from your feature branch back to dev
+- have someone else review the code and verify it works
+  - make sure your current branch is committed
+  - check out dev ```git checkout dev```
+  - update dev . ```git pull origin dev```
+  - make a release candidate branch.  for example rc20190805_1642 (august 8th 2019 at 4:42 pm) ```git checkout -b rc########```
+  - merge in the target branch ```git pull origin <feature branch>```
+  - test code on page
+  - if that works, merge the next thing, if anything
+  - if all work, check out dev
+  - then merge your rc branch into dev
+  - all new features should be based on dev
+
 ## Teams
 
 ### Team 1

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gemstone Mining</title>
+  <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="game.js"></script>
+  <script src="mine.js"></script>
+  <script src="player.js"></script>
+  <script src="main.js"></script>
+
+</head>
+<body>
+  <div id="rulesModal" class="rules hidden">
+    <!-- Modal content -->
+    <div class="rules-content">
+      <h1>Welcome to GemStone Mining!</h1>
+      <p>Collect gems and beat your opponent in points!</p>
+      <p>But be careful not to get two obsidian gems</p>
+      <p>Or you will lose your gems and be kicked out of the mine</p>
+      <p>Here is the chart for how much each gem is worth!</p>
+      <p>Topaz = 1</p>
+      <p>Amethyst = 2</p>
+      <p>Emerald = 3</p>
+      <p>Sapphire = 4</p>
+      <p>Ruby = 6</p>
+      <p>Diamond = 8</p>
+      <p>Obsidian = 0</p>
+      <button class="close-rules">Close Rules</button>
+    </div>
+
+  </div>
+
+    <div id="winModal" class="winner hidden">
+      <!-- Modal content -->
+      <div class="winner-content">
+        <h1 class="winningPlayer">Player 0</h1>
+        <p>CONGRATULATIONS</p>
+        <p>YOU WIN!</p>
+        <button class="restart-game">Restart Game</button>
+      </div>
+
+    </div>
+
+  <header>
+    <div class="roundNumber">Round 1</div>
+    <div class="title"></div>
+    <div class="playerTurn">Player Turn : Player 1</div>
+  </header>
+  <div class="gameArea">
+    <div class="player1 yourTurn">
+      <p class="playerName">Player1</p>
+      <p class="points">Points: 0</p>
+      <p class="gems">Gems</p>
+      <p class="topaz">Topaz: 0</p>
+      <p class="amethyst">Amethyst: 0</p>
+      <p class="emerald">Emerald: 0</p>
+      <p class="sapphire">Sapphire: 0</p>
+      <p class="ruby">Ruby: 0</p>
+      <p class="diamond">Diamond: 0</p>
+      <p class="obsidian">Obsidian: 0</p>
+    </div>
+    <div class="buttonContainer">
+      <button class="mineGems">Mine Gems</button>
+      <button class="leaveMine">Leave Mine</button>
+    </div>
+    <div class="player2">
+      <p class="playerName">Player2</p>
+      <p class="points">Points: 0</p>
+      <p class="gems">Gems</p>
+      <p class="topaz">Topaz: 0</p>
+      <p class="amethyst">Amethyst: 0</p>
+      <p class="emerald">Emerald: 0</p>
+      <p class="sapphire">Sapphire: 0</p>
+      <p class="ruby">Ruby: 0</p>
+      <p class="diamond">Diamond: 0</p>
+      <p class="obsidian">Obsidian: 0</p>
+    </div>
+  </div>
+  <footer><button class="rulesButton">Rules</button></footer>
+</body>
+</html>

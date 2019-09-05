@@ -1,0 +1,177 @@
+* {
+  margin: 2px;
+  font-family: 'Black Ops One', cursive;
+}
+header, footer {
+  height: 10vh;
+  width: 100%;
+  border: 2px solid black;
+  background-color: burlywood;
+  display: table;
+}
+.title {
+  background-image: url('images/logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+button {
+  padding: 20px;
+  background-color: rgb(139, 0, 0, 0.5);
+  color: white;
+  border: 2px dotted black;
+  border-radius: 20px;
+  font-size: 100%;
+}
+button:hover {
+  transition: 300ms;
+  transform: scale(1.1);
+  border: 2px solid gold;
+  background-color: rgb(139, 0, 0);
+}
+.roundNumber, .title, .playerTurn {
+  display: table-cell;
+  width: 32%;
+  text-align: center;
+  vertical-align:middle;
+  font-size: 200%;
+  border: 2px solid black;
+  color: white;
+}
+
+/* Game Area */
+.player1 > *, .player2 > * {
+  border: 2px solid burlywood;
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.5));
+  border-radius: 20px;
+    text-shadow: 2px 2px 2px black;
+}
+
+.gameArea {
+  height: 80vh;
+  width: 100%;
+  border: 2px solid black;
+  background-color: brown;
+  display: table;
+}
+.player1, .buttonContainer, .player2 {
+  width: 25%;
+  display: table-cell;
+  margin: 10px;
+  border: 2px solid black;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 150%;
+  background-repeat: 'no-repeat';
+  background-size: cover;
+  background-position: center;
+}
+.player1 {
+  background-image: url('images/player1.jpg');
+}
+.buttonContainer {
+  background-image: url('images/mines.gif');
+}
+.player2 {
+  background-image: url('images/player2.jpg');
+}
+.yourTurn {
+  border: 8px double gold;
+}
+.playerName {
+  color:white;
+}
+.points {
+  color: gold;
+}
+.gems {
+  color: white;
+}
+.topaz {
+  color: #ffc87c;
+}
+.amethyst {
+  color: #9966cc;
+}
+.emerald {
+  color: #50c878;
+}
+.sapphire {
+  color: #082567;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: lightgrey;
+}
+.ruby {
+  color: #e0115F;
+}
+.diamond {
+  color: #b9f2ff;
+}
+.obsidian {
+  color: #343637;
+    -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: lightgrey;
+}
+
+/* footer */
+
+footer {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* modal */
+
+.hidden {
+  display: none;
+}
+
+.rules, .winner{
+  position: fixed;
+  z-index: 1;
+  width: 50%;
+  height: 75%;
+  overflow: auto;
+  background-color: white;
+  border: 4px double black;
+  margin: 0 auto;
+  left: 25%;
+  top: 15%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-size: 120%;
+  text-shadow: 3px 3px 3px black;
+  text-align: center;
+}
+.rules-content, .winner-content {
+  vertical-align: middle;
+}
+.rules {
+  background-image: url('images/rules-background.jpg');
+}
+.winner {
+  background-image: url('images/winner.gif');
+}
+
+/* leaving mine and accident classes */
+
+.leftMine:before {
+  content: 'LEFT MINE';
+  font-size: 200%;
+  color: lightgreen;
+  text-shadow: 5px 5px 5px black;
+}
+
+.accident > * {
+color: darkgray;
+}
+.accident:before {
+  content: 'ACCIDENT';
+  font-size: 200%;
+  color: red;
+  text-shadow: 5px 5px 5px black;
+}
