@@ -69,7 +69,7 @@ button:hover {
   height: 80vh;
 }
 
-.playerTable, .buttonContainer, .player.currentPlayer {
+.playerTable, .buttonContainer, .currentPlayerContainer .player {
   width: 25%;
   display: table-cell;
   margin: 10px;
@@ -107,7 +107,7 @@ button:hover {
 .player7 {
   background-image: url('images/player7.jpg');
 }
-.player.yourTurn {
+.player.yourTurn, .currentPlayerContainer > .player {
   border: 8px double gold;
 }
 .playerName {

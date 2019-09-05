@@ -1,8 +1,22 @@
 class Player{
-  constructor(playerClass, playerName){
-      //The player name that is being passed in will be the class name of the player on the dom aka '.player1' '.player2'
-    this.playerDom = playerClass;
-    this.playerName = playerName;
+  constructor(playerNumber){
+    this.playerNumber = playerNumber;
+    this.playerDom = null;
+    this.domElements = {
+      container: null,
+      name: null,
+      points: null,
+      gems: {
+        topaz: null,
+        amethyst: null,
+        emerald: null,
+        sapphire: null,
+        ruby: null,
+        diamond: null,
+        obsidian: null
+      }
+    }
+    this.playerName = "Player " + playerNumber;
     this.points = 0;
     this.gems = {
       'topaz': 0,
@@ -29,9 +43,38 @@ class Player{
 
   render() {
     var playerContainer = $('.playerContainer');
-    this.playerDom = $('<div>').addClass(this.playerDom + ' player');
-    var playerName = $('<p>').addClass(this.playerName);
-    var points = $('<p>').addClass('points').text('Points : 0');
+    this.playerDom = $('<div>').addClass('player' + this.playerNumber + ' player');
+    var playerNameContainer = $("<div>",{
+      'class':"playerMetaData"
+    });
+    var playerGemScoreBoard = $("<div>",{
+      'class': 'playerGemCounts'
+    })
+    for( var gemName in this.gems){
+      var gemIcon = $("<span>",{
+        'class': 'gemIcon '+ gemName,
+        html: '&diams;'
+      });
+      var gemCount = $("<span>",{
+        'class': 'gemCount',
+        text: this.gems[gemName]
+      })
+      this.domElements.gems[gemName] = gemCount;
+      gemIcon.append(gemCount);
+      playerGemScoreBoard.append(gemIcon)
+    }
+    var playerName = $('<p>').addClass('playerName').text(this.playerName);
+    this.domElements.container= this.playerDom;
+    this.domElements.name = playerNameContainer;
+    var pointsContainer = $("<span>",{
+      'class': 'points',
+      text: ' points: '
+    })
+    var points = $('<span>').addClass('points').text('0');
+    this.domElements.points = points;
+    pointsContainer.append(points);
+    playerName.append(pointsContainer);
+    playerNameContainer.append(playerName, playerGemScoreBoard);
     var gems = $('<p>').addClass('gems').text('Gems');
     var topaz = $('<p>').addClass('topaz').text('Topaz : 0');
     var amethyst = $('<p>').addClass('amethyst').text('Amethyst : 0');
@@ -40,24 +83,23 @@ class Player{
     var ruby = $('<p>').addClass('ruby').text('Ruby : 0');
     var diamond = $('<p>').addClass('diamond').text('Diamond : 0');
     var obsidian = $('<p>').addClass('obsidian').text('Obsidian : 0');
-    this.playerDom.append(playerName, points, gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian);
-    playerContainer.append(this.playerDom);
+    this.domElements.container.append(this.domElements.name)
+    this.playerDom.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian);
+    playerContainer.append(this.domElements.container)
   }
 
-  takeTurn(mineOrLeave) {
-    // this.mine() or this.leaveMine()
+  updateGemCount(gemName){
+    this.gems[gemName]++;
+    this.domElements.gems[gemName].text(this.gems[gemName] );
   }
 
   mine(mineObject) {
-    // mine.mineGems(); mine for 2 gems
-    // if one or more gems
-    //console.log(this.gems);
     var minedGems = mineObject.mineTwoGems();
     for (var mgIndex = 0; mgIndex < minedGems.length; mgIndex++) {
-      this.gems[minedGems[mgIndex]]++;
+      this.updateGemCount(minedGems[mgIndex]);
     }
-    //console.log(this.gems);
     this.pointsConverter(minedGems);
+    this.updateDisplayedPoints();
     return minedGems;
   }
 
@@ -71,13 +113,16 @@ class Player{
   }
 
   pointsConverter(minedGems) {
-    //console.log(this.points)
     for (var i = 0; i < minedGems.length; i++) {
       this.points += this.pointChart[minedGems[i]]
     }
-    //console.log(this.points)
-    // loops through array add up each
-    // returns the total points by combining the values of all the gems mined
+  }
+
+  updateDisplayedPoints(){
+    for( var gem in this.gems){
+      this.domElements.gems[gem].text( this.gems[gem]);
+    }
+    this.domElements.points.text( this.points )
   }
 
   getPoints() {
@@ -102,11 +147,9 @@ class Player{
       'diamond': 0,
       'obsidian': 0
     };
+    this.updateDisplayedPoints();
     mine.returnPlayerGemsToMine(outputArray);
+
   }
 
-
-  // useCard(){
-  //
-  //}
 }
