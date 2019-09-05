@@ -22,6 +22,7 @@ class Gameboard {
     $(".close-rules").on("click", function () { $(".rules").toggleClass("hidden") });
     $(".restart-game").on('click', this.restartGameClick);
     $('.createPlayer').on('click', this.createPlayer);
+    $('.playerContainer').on('click', '.player', this.playerClick);
   }
 
 
