@@ -7,6 +7,7 @@ class Gameboard {
     this.mineGemClick = this.mineGemClick.bind(this);
     this.leaveMineClick = this.leaveMineClick.bind(this);
     this.restartGameClick = this.restartGameClick.bind(this);
+    this.createPlayer = this.createPlayer.bind(this);
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.round = 1;
     this.domElements = {
@@ -30,15 +31,14 @@ class Gameboard {
     $(".rulesButton").on("click", function () { $(".rules").toggleClass("hidden") });
     $(".close-rules").on("click", function () { $(".rules").toggleClass("hidden") });
     $(".restart-game").on('click', this.restartGameClick);
+    $('.createPlayer').on('click', this.createPlayer);
   }
 
-  createPlayer(numberOfPlayers) {
-    // create new Player according to number of players
-    // append player dom elements
-    // var playerOne = $(".player1").addClass("yourTurn");
-    // this.players.push(new Player('.player1', 'Player 1'));
-    // var playerTwo = $(".player2");
-    // this.players.push(new Player('.player2', 'Player 2'));
+
+
+  createPlayer(event) {
+    var numberOfPlayers = parseInt(event.currentTarget.innerText);
+    $('.players-modal').toggleClass('hidden');
     for(var i = 1; i <= numberOfPlayers; i++) {
         this.players.push(new Player('.player' + i, 'Player ' + i));
     }
