@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Gemstone Mining</title>
   <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
@@ -11,6 +12,7 @@
   <script src="main.js"></script>
 
 </head>
+
 <body>
   <div id="rulesModal" class="rules hidden">
     <!-- Modal content -->
@@ -32,16 +34,16 @@
 
   </div>
 
-    <div id="winModal" class="winner hidden">
-      <!-- Modal content -->
-      <div class="winner-content">
-        <h1 class="winningPlayer">Player 0</h1>
-        <p>CONGRATULATIONS</p>
-        <p>YOU WIN!</p>
-        <button class="restart-game">Restart Game</button>
-      </div>
-
+  <div id="winModal" class="winner hidden">
+    <!-- Modal content -->
+    <div class="winner-content">
+      <h1 class="winningPlayer">Player 0</h1>
+      <p>CONGRATULATIONS</p>
+      <p>YOU WIN!</p>
+      <button class="restart-game">Restart Game</button>
     </div>
+
+  </div>
 
   <header>
     <div class="roundNumber">Round 1</div>
@@ -49,35 +51,114 @@
     <div class="playerTurn">Player Turn : Player 1</div>
   </header>
   <div class="gameArea">
-    <div class="player1 yourTurn">
-      <p class="playerName">Player1</p>
-      <p class="points">Points: 0</p>
-      <p class="gems">Gems</p>
-      <p class="topaz">Topaz: 0</p>
-      <p class="amethyst">Amethyst: 0</p>
-      <p class="emerald">Emerald: 0</p>
-      <p class="sapphire">Sapphire: 0</p>
-      <p class="ruby">Ruby: 0</p>
-      <p class="diamond">Diamond: 0</p>
-      <p class="obsidian">Obsidian: 0</p>
+    <div class="playerTable">
+      <div class="playerContainer">
+        <!-- <div class="player player1 yourTurn">
+          <p class="playerName">Player1</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div>
+        <div class="player player2">
+          <p class="playerName">Player2</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div>
+        <div class="player player3">
+          <p class="playerName">Player3</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div>
+        <div class="player player4">
+          <p class="playerName">Player4</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div>
+        <div class="player player5">
+          <p class="playerName">Player5</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div>
+        <div class="player player6">
+          <p class="playerName">Player6</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div>
+        <div class="player player7">
+          <p class="playerName">Player7</p>
+          <p class="points">Points: 0</p>
+          <p class="gems">Gems</p>
+          <p class="topaz">Topaz: 0</p>
+          <p class="amethyst">Amethyst: 0</p>
+          <p class="emerald">Emerald: 0</p>
+          <p class="sapphire">Sapphire: 0</p>
+          <p class="ruby">Ruby: 0</p>
+          <p class="diamond">Diamond: 0</p>
+          <p class="obsidian">Obsidian: 0</p>
+        </div> -->
+      </div>
     </div>
     <div class="buttonContainer">
       <button class="mineGems">Mine Gems</button>
       <button class="leaveMine">Leave Mine</button>
     </div>
-    <div class="player2">
-      <p class="playerName">Player2</p>
-      <p class="points">Points: 0</p>
-      <p class="gems">Gems</p>
-      <p class="topaz">Topaz: 0</p>
-      <p class="amethyst">Amethyst: 0</p>
-      <p class="emerald">Emerald: 0</p>
-      <p class="sapphire">Sapphire: 0</p>
-      <p class="ruby">Ruby: 0</p>
-      <p class="diamond">Diamond: 0</p>
-      <p class="obsidian">Obsidian: 0</p>
+    <div class="currentPlayerContainer">
+      <!-- <div class="player1 currentPlayer player">
+        <p class="playerName">Player2</p>
+        <p class="points">Points: 0</p>
+        <p class="gems">Gems</p>
+        <p class="topaz">Topaz: 0</p>
+        <p class="amethyst">Amethyst: 0</p>
+        <p class="emerald">Emerald: 0</p>
+        <p class="sapphire">Sapphire: 0</p>
+        <p class="ruby">Ruby: 0</p>
+        <p class="diamond">Diamond: 0</p>
+        <p class="obsidian">Obsidian: 0</p>
+      </div> -->
     </div>
   </div>
   <footer><button class="rulesButton">Rules</button></footer>
 </body>
+
 </html>
