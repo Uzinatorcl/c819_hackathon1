@@ -99,7 +99,7 @@ class Gameboard{
 
   updatePlayerGems( player, newGems ){
     // update DOM to show player's current gem count
-    for (var gemIndex = 0; gemIndex < 2; gemIndex++){
+    for (var gemIndex = 0; gemIndex < newGems.length; gemIndex++){
       //var playerClass = $(player.playerDom).attr("class");
       var gemElement = $(player.playerDom).children("." + newGems[gemIndex]);
       var newGemCount = player.gems[newGems[gemIndex]];
@@ -134,8 +134,8 @@ class Gameboard{
         winner = this.players[playerIndex];
       }
     }
-    $("winner").toggleClass("hidden");
-    $("winningPlayer").text(winner.playerDom.attr("class"));
+    $(".winner").toggleClass("hidden");
+    $(".winningPlayer").text(winner.playerDom.attr("class"));
     console.log(winner.playerDom.attr("class") + " is the winner!");
   }
 
