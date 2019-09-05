@@ -83,15 +83,29 @@ button:hover {
   overflow: hidden;
   height: 80vh;
 }
-
-.player1 {
-  background-image: url('images/player1.jpg');
-}
 .buttonContainer {
   background-image: url('images/mines.gif');
 }
+.player1 {
+  background-image: url('images/player1.jpg');
+}
 .player2 {
   background-image: url('images/player2.jpg');
+}
+.player3 {
+  background-image: url('images/player3.jpg');
+}
+.player4 {
+  background-image: url('images/player4.jpg');
+}
+.player5 {
+  background-image: url('images/player5.jpg');
+}
+.player6 {
+  background-image: url('images/player6.jpg');
+}
+.player7 {
+  background-image: url('images/player7.jpg');
 }
 .player.yourTurn, .currentPlayerContainer > .player {
   border: 8px double gold;
@@ -212,10 +226,19 @@ color: darkgray;
   font-size: 120%;
   text-shadow: 3px 3px 3px black;
   text-align: center;
-  background-image: url('images/7dwarfs.png');
+  background-image: url('images/dwarves8.png');
   background-repeat: no-repeat;
   background-position:  bottom;
+  background-size: contain;
+  background-color: maroon;
 }
+.players-content {
+  margin-top: 20%;
+}
+.createPlayer {
+  font-size: 200%;
+}
+
 
 .playerContainer {
   display: flex;
