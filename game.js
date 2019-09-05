@@ -8,9 +8,14 @@ class Gameboard {
     this.leaveMineClick = this.leaveMineClick.bind(this);
     this.restartGameClick = this.restartGameClick.bind(this);
     this.createPlayer = this.createPlayer.bind(this);
+    this.hideGemsReceivedModal = this.hideGemsReceivedModal.bind(this);
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.round = 1;
     this.domElements = {
+      gemModal: $(".gemsReceivedContainer"),
+      gemModalPlayer: $(".playerMine"),
+      gem1: $(".gem1"),
+      gem2: $(".gem2")
     }
   }
 
@@ -44,6 +49,7 @@ class Gameboard {
     console.log("player " + (this.playerTurnIndex + 1) + " is mining for gems");
     var player = this.currentPlayer();
     var gemsMined = player.mine(this.gemMine);
+    this.updateGemsReceived(gemsMined);
     if (player.gems["obsidian"] === 2) {
       this.playerAccident(player);
       return;
@@ -145,6 +151,21 @@ class Gameboard {
     this.playerTurnIndex = 0;
     $('.winner').toggleClass('hidden');
     this.cloneAndAppend();
+  }
+
+  updateGemsReceived(gems){
+    console.log(gems);
+    this.domElements.gemModal.toggleClass("hidden");
+    this.domElements.gemModalPlayer.text(this.currentPlayer().playerName + " Received:");
+    this.domElements.gem1.attr("class", "gem1 " + gems[0]);
+    this.domElements.gem1.html("&diams; " + gems[0]);
+    this.domElements.gem2.attr("class", "gem1 " + gems[1]);
+    this.domElements.gem2.html("&diams; " + gems[1]);
+    setTimeout(this.hideGemsReceivedModal, 1200);
+  }
+
+  hideGemsReceivedModal(){
+    this.domElements.gemModal.toggleClass("hidden");
   }
 
 }
