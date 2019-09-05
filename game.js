@@ -30,7 +30,7 @@ class Gameboard {
     var numberOfPlayers = parseInt(event.currentTarget.innerText);
     $('.players-modal').toggleClass('hidden');
     for(var i = 1; i <= numberOfPlayers; i++) {
-        this.players.push(new Player('.player' + i, 'Player ' + i));
+        this.players.push(new Player(i));
     }
     this.cloneAndAppend();
   }
