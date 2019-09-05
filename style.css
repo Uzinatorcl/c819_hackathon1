@@ -40,7 +40,7 @@ button:hover {
 }
 
 /* Game Area */
-.player1 > *, .player2 > * {
+.player > *, .currentPlayer > *{
   border: 2px solid burlywood;
   background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.5));
   border-radius: 20px;
@@ -54,7 +54,22 @@ button:hover {
   background-color: brown;
   display: table;
 }
-.player1, .buttonContainer, .player2 {
+
+.currentPlayerContainer{
+  width: 25%;
+  display: table-cell;
+  margin: 10px;
+  border: 2px solid black;
+  text-align: center;
+  vertical-align: middle;
+  background-repeat: 'no-repeat';
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  height: 80vh;
+}
+
+.playerTable, .buttonContainer, .currentPlayerContainer .player {
   width: 25%;
   display: table-cell;
   margin: 10px;
@@ -65,17 +80,34 @@ button:hover {
   background-repeat: 'no-repeat';
   background-size: cover;
   background-position: center;
-}
-.player1 {
-  background-image: url('images/player1.jpg');
+  overflow: hidden;
+  height: 80vh;
 }
 .buttonContainer {
   background-image: url('images/mines.gif');
 }
+.player1 {
+  background-image: url('images/player1.jpg');
+}
 .player2 {
   background-image: url('images/player2.jpg');
 }
-.yourTurn {
+.player3 {
+  background-image: url('images/player3.jpg');
+}
+.player4 {
+  background-image: url('images/player4.jpg');
+}
+.player5 {
+  background-image: url('images/player5.jpg');
+}
+.player6 {
+  background-image: url('images/player6.jpg');
+}
+.player7 {
+  background-image: url('images/player7.jpg');
+}
+.player.yourTurn, .currentPlayerContainer > .player {
   border: 8px double gold;
 }
 .playerName {
@@ -126,7 +158,7 @@ footer {
   display: none;
 }
 
-.rules, .winner{
+.rules, .winner {
   position: fixed;
   z-index: 1;
   width: 50%;
@@ -147,7 +179,7 @@ footer {
   text-shadow: 3px 3px 3px black;
   text-align: center;
 }
-.rules-content, .winner-content {
+.rules-content, .winner-content, .players-modal-content {
   vertical-align: middle;
 }
 .rules {
@@ -156,6 +188,7 @@ footer {
 .winner {
   background-image: url('images/winner.gif');
 }
+
 
 /* leaving mine and accident classes */
 
@@ -174,4 +207,71 @@ color: darkgray;
   font-size: 200%;
   color: red;
   text-shadow: 5px 5px 5px black;
+}
+/* Players modal  */
+.players-modal {
+  position: fixed;
+  z-index: 1;
+  width: 50%;
+  height: 75%;
+  overflow: auto;
+  background-color: white;
+  border: 4px double black;
+  margin: 0 auto;
+  left: 25%;
+  top: 15%;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-size: 120%;
+  text-shadow: 3px 3px 3px black;
+  text-align: center;
+  background-image: url('images/dwarves8.png');
+  background-repeat: no-repeat;
+  background-position:  bottom;
+  background-size: contain;
+  background-color: maroon;
+}
+.players-content {
+  margin-top: 20%;
+}
+.createPlayer {
+  font-size: 200%;
+}
+
+
+.playerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: flex .3s linear;
+  flex: 1;
+  border: 1px solid black;
+}
+
+.player p{
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.collapsed{
+  flex: 0;
+}
+
+.expanded{
+  justify-content: center;
+  flex: 1;
 }

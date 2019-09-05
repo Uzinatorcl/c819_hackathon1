@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Gemstone Mining</title>
   <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
@@ -11,9 +12,23 @@
   <script src="main.js"></script>
 
 </head>
+
 <body>
+  <div class="players-modal">
+    <div class="players-content">
+      <h1>GAME SETUP</h1>
+      <h2>Please choose the number of players</h2>
+      <button class="createPlayer">3</button>
+      <button class="createPlayer">4</button>
+      <button class="createPlayer">5</button>
+      <button class="createPlayer">6</button>
+      <button class="createPlayer">7</button>
+    </div>
+
+  </div>
+
+
   <div id="rulesModal" class="rules hidden">
-    <!-- Modal content -->
     <div class="rules-content">
       <h1>Welcome to GemStone Mining!</h1>
       <p>Collect gems and beat your opponent in points!</p>
@@ -32,16 +47,15 @@
 
   </div>
 
-    <div id="winModal" class="winner hidden">
-      <!-- Modal content -->
-      <div class="winner-content">
-        <h1 class="winningPlayer">Player 0</h1>
-        <p>CONGRATULATIONS</p>
-        <p>YOU WIN!</p>
-        <button class="restart-game">Restart Game</button>
-      </div>
-
+  <div id="winModal" class="winner hidden">
+    <div class="winner-content">
+      <h1 class="winningPlayer">Player 0</h1>
+      <p>CONGRATULATIONS</p>
+      <p>YOU WIN!</p>
+      <button class="restart-game">Restart Game</button>
     </div>
+
+  </div>
 
   <header>
     <div class="roundNumber">Round 1</div>
@@ -49,35 +63,20 @@
     <div class="playerTurn">Player Turn : Player 1</div>
   </header>
   <div class="gameArea">
-    <div class="player1 yourTurn">
-      <p class="playerName">Player1</p>
-      <p class="points">Points: 0</p>
-      <p class="gems">Gems</p>
-      <p class="topaz">Topaz: 0</p>
-      <p class="amethyst">Amethyst: 0</p>
-      <p class="emerald">Emerald: 0</p>
-      <p class="sapphire">Sapphire: 0</p>
-      <p class="ruby">Ruby: 0</p>
-      <p class="diamond">Diamond: 0</p>
-      <p class="obsidian">Obsidian: 0</p>
+    <div class="playerTable">
+      <div class="playerContainer">
+
+      </div>
     </div>
     <div class="buttonContainer">
       <button class="mineGems">Mine Gems</button>
       <button class="leaveMine">Leave Mine</button>
     </div>
-    <div class="player2">
-      <p class="playerName">Player2</p>
-      <p class="points">Points: 0</p>
-      <p class="gems">Gems</p>
-      <p class="topaz">Topaz: 0</p>
-      <p class="amethyst">Amethyst: 0</p>
-      <p class="emerald">Emerald: 0</p>
-      <p class="sapphire">Sapphire: 0</p>
-      <p class="ruby">Ruby: 0</p>
-      <p class="diamond">Diamond: 0</p>
-      <p class="obsidian">Obsidian: 0</p>
+    <div class="currentPlayerContainer">
+
     </div>
   </div>
   <footer><button class="rulesButton">Rules</button></footer>
 </body>
+
 </html>
