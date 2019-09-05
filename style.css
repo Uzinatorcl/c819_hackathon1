@@ -215,7 +215,7 @@ color: darkgray;
   background-image: url('images/7dwarfs.png');
   background-repeat: no-repeat;
   background-position:  bottom;
-
+}
 
 .playerContainer {
   display: flex;
