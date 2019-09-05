@@ -24,7 +24,6 @@ class Gameboard {
     // create appropriate number of players
     // create mine
     // start game with first player turn
-    this.createPlayer();
     this.createMine();
     $(".buttonContainer").on("click", ".mineGems", this.mineGemClick);
     $(".buttonContainer").on("click", ".leaveMine", this.leaveMineClick);
@@ -33,13 +32,16 @@ class Gameboard {
     $(".restart-game").on('click', this.restartGameClick);
   }
 
-  createPlayer() {
+  createPlayer(numberOfPlayers) {
     // create new Player according to number of players
     // append player dom elements
-    var playerOne = $(".player1").addClass("yourTurn");
-    this.players.push(new Player('.player1', 'Player 1'));
-    var playerTwo = $(".player2");
-    this.players.push(new Player('.player2', 'Player 2'));
+    // var playerOne = $(".player1").addClass("yourTurn");
+    // this.players.push(new Player('.player1', 'Player 1'));
+    // var playerTwo = $(".player2");
+    // this.players.push(new Player('.player2', 'Player 2'));
+    for(var i = 1; i <= numberOfPlayers; i++) {
+        this.players.push(new Player('.player' + i, 'Player ' + i));
+    }
   }
 
   createMine() {
