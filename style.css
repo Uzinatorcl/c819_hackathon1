@@ -48,6 +48,7 @@ button:hover {
 }
 
 .gameArea {
+  position: relative;
   height: 80vh;
   width: 100%;
   border: 2px solid black;
@@ -154,11 +155,7 @@ footer {
 
 /* modal */
 
-.hidden {
-  display: none;
-}
-
-.rules, .winner {
+.rules, .winner, .gemsReceivedContainer{
   position: fixed;
   z-index: 1;
   width: 50%;
@@ -175,13 +172,19 @@ footer {
   color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
-  font-size: 120%;
+  font-size: 170%;
   text-shadow: 3px 3px 3px black;
   text-align: center;
 }
 .rules-content, .winner-content, .players-modal-content {
   vertical-align: middle;
 }
+
+.rules-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 99%;
+}
+
 .rules {
   background-image: url('images/rules-background.jpg');
 }
@@ -189,6 +192,22 @@ footer {
   background-image: url('images/winner.gif');
 }
 
+.gemsReceivedContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("images/gems-received.jpg");
+}
+
+.playerGems{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 150%;
+}
+
+.gemsReceivedContainer span{
+  text-transform: capitalize;
+}
 
 /* leaving mine and accident classes */
 
@@ -261,7 +280,8 @@ color: darkgray;
   border: 1px solid black;
 }
 
-.player p{
+.player > p{
+  text-transform: capitalize;
   white-space: nowrap;
   overflow: hidden;
   flex: 0 0 auto;
@@ -274,4 +294,8 @@ color: darkgray;
 .expanded{
   justify-content: center;
   flex: 1;
+}
+
+.hidden {
+  display: none;
 }

@@ -24,41 +24,48 @@
       <button class="createPlayer">6</button>
       <button class="createPlayer">7</button>
     </div>
-
   </div>
-
 
   <div id="rulesModal" class="rules hidden">
     <div class="rules-content">
-      <h1>Welcome to GemStone Mining!</h1>
-      <p>Collect gems and beat your opponent in points!</p>
-      <p>But be careful not to get two obsidian gems</p>
-      <p>Or you will lose your gems and be kicked out of the mine</p>
-      <p>Here is the chart for how much each gem is worth!</p>
-      <p>Topaz = 1</p>
-      <p>Amethyst = 2</p>
-      <p>Emerald = 3</p>
-      <p>Sapphire = 4</p>
-      <p>Ruby = 6</p>
-      <p>Diamond = 8</p>
-      <p>Obsidian = 0</p>
+      <h2>Welcome to GemStone Mining!</h2>
+      <p>
+        Collect gems and beat your opponent in points! But be careful
+        not to get two obsidian gems or you will lose your gems and
+        be kicked out of the mine! Here is the chart for how much each gem is worth!
+      </p>
+      <p>
+        <span class="topaz">&diams; Topaz = 1</span>
+        <span class="amethyst">&diams; Amethyst = 2</span>
+        <span class="emerald">&diams; Emerald = 3</span>
+      </p>
+      <p>
+        <span class="sapphire">&diams; Sapphire = 4</span>
+        <span class="ruby">&diams; Ruby = 6</span>
+        <span class="diamond">&diams; Diamond = 8</span>
+      </p>
+      <p>
+        <span class="obsidian">&diams; Obsidian = 0</span>
+      </p>
       <button class="close-rules">Close Rules</button>
     </div>
-
   </div>
 
   <div id="winModal" class="winner hidden">
     <div class="winner-content">
       <h1 class="winningPlayer">Player 0</h1>
-      <p>CONGRATULATIONS</p>
-      <p>YOU WIN!</p>
-      <button class="restart-game">Restart Game</button>
+      <p class='winningMessage'>YOU WON THIS ROUND!</p>
+      <button class="restart-game">Next Round</button>
     </div>
+  </div>
 
+  <div id="gemsReceivedModal" class="gemsReceivedContainer hidden">
+    <h1 class="playerMine">PLAYER 1 RECEIVED:</h1>
+    <div class="playerGems"><span class="gem1 ruby">&diams; ruby</span><span class="gem2 diamond">&diams; diamond</span></div>
   </div>
 
   <header>
-    <div class="roundNumber">Round 1</div>
+    <div class="roundNumber">Round 0</div>
     <div class="title"></div>
     <div class="playerTurn">Player Turn : Player 1</div>
   </header>
