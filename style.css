@@ -40,7 +40,7 @@ button:hover {
 }
 
 /* Game Area */
-.player1 > *, .player2 > * {
+.player > *, .currentPlayer > *{
   border: 2px solid burlywood;
   background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.5));
   border-radius: 20px;
@@ -54,7 +54,22 @@ button:hover {
   background-color: brown;
   display: table;
 }
-.player1, .buttonContainer, .player2 {
+
+.currentPlayerContainer{
+  width: 25%;
+  display: table-cell;
+  margin: 10px;
+  border: 2px solid black;
+  text-align: center;
+  vertical-align: middle;
+  background-repeat: 'no-repeat';
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  height: 80vh;
+}
+
+.playerTable, .buttonContainer, .player.currentPlayer {
   width: 25%;
   display: table-cell;
   margin: 10px;
@@ -65,7 +80,10 @@ button:hover {
   background-repeat: 'no-repeat';
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+  height: 80vh;
 }
+
 .player1 {
   background-image: url('images/player1.jpg');
 }
@@ -75,7 +93,7 @@ button:hover {
 .player2 {
   background-image: url('images/player2.jpg');
 }
-.yourTurn {
+.player.yourTurn {
   border: 8px double gold;
 }
 .playerName {
@@ -197,4 +215,40 @@ color: darkgray;
   background-image: url('images/7dwarfs.png');
   background-repeat: no-repeat;
   background-position:  bottom;
+
+
+.playerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: flex .3s linear;
+  flex: 1;
+  border: 1px solid black;
+}
+
+.player p{
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.collapsed{
+  flex: 0;
+}
+
+.expanded{
+  justify-content: center;
+  flex: 1;
 }

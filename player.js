@@ -1,7 +1,7 @@
 class Player{
-  constructor(playerDom, playerName){
+  constructor(playerClass, playerName){
       //The player name that is being passed in will be the class name of the player on the dom aka '.player1' '.player2'
-    this.playerDom = $(playerDom);
+    this.playerDom = playerClass;
     this.playerName = playerName;
     this.points = 0;
     this.gems = {
@@ -24,10 +24,24 @@ class Player{
     }
     this.inMine = true;
     this.hadAccident = false;
+    this.render();
   }
 
   render() {
-    // create and set all dom elements for player
+    var playerContainer = $('.playerContainer');
+    this.playerDom = $('<div>').addClass(this.playerDom + ' player');
+    var playerName = $('<p>').addClass(this.playerName);
+    var points = $('<p>').addClass('points').text('Points : 0');
+    var gems = $('<p>').addClass('gems').text('Gems');
+    var topaz = $('<p>').addClass('topaz').text('Topaz : 0');
+    var amethyst = $('<p>').addClass('amethyst').text('Amethyst : 0');
+    var emerald = $('<p>').addClass('emerald').text('Emerald : 0');
+    var sapphire = $('<p>').addClass('sapphire').text('Sapphire : 0');
+    var ruby = $('<p>').addClass('ruby').text('Ruby : 0');
+    var diamond = $('<p>').addClass('diamond').text('Diamond : 0');
+    var obsidian = $('<p>').addClass('obsidian').text('Obsidian : 0');
+    this.playerDom.append(playerName, points, gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian);
+    playerContainer.append(this.playerDom);
   }
 
   takeTurn(mineOrLeave) {
