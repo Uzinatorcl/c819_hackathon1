@@ -14,11 +14,13 @@ class Player{
         ruby: null,
         diamond: null,
         obsidian: null
-      }
+      },
+      roundPoints: null,
     }
     this.playerName = "Player " + playerNumber;
     this.points = 0;
     this.totalPoints = 0;
+    this.pointsEachRound = [];
     this.gems = {
       'topaz': 0,
       'amethyst': 0,
@@ -84,8 +86,10 @@ class Player{
     var ruby = $('<p>').addClass('ruby').text('Ruby : 0');
     var diamond = $('<p>').addClass('diamond').text('Diamond : 0');
     var obsidian = $('<p>').addClass('obsidian').text('Obsidian : 0');
+    var rounds = $('<p>').addClass('roundPoints');
+    this.domElements.roundPoints = rounds;
     this.domElements.container.append(this.domElements.name)
-    this.playerDom.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian);
+    this.playerDom.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian, rounds);
     playerContainer.append(this.domElements.container)
   }
 
@@ -124,6 +128,10 @@ class Player{
       this.domElements.gems[gem].text( this.gems[gem]);
     }
     this.domElements.points.text( this.points )
+  }
+
+  updateRoundPoints(round){
+    this.domElements.roundPoints.text(this.domElements.roundPoints.text() + "R" + round + ": " + this.pointsEachRound[round-1] + " ");
   }
 
   getPoints() {

@@ -11,6 +11,7 @@ class Gameboard {
     this.hideGemsReceivedModal = this.hideGemsReceivedModal.bind(this);
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.round = 0;
+    this.audio;
     this.domElements = {
       gemModal: $(".gemsReceivedContainer"),
       gemModalPlayer: $(".playerMine"),
@@ -58,6 +59,7 @@ class Gameboard {
   }
 
   mineGemClick() {
+    this.clickSounds('mine.mp3');
     console.log("player " + (this.playerTurnIndex + 1) + " is mining for gems");
     var player = this.currentPlayer();
     var gemsMined = player.mine(this.gemMine);
@@ -71,6 +73,9 @@ class Gameboard {
   }
 
   leaveMineClick() {
+    if(this.currentPlayer().hadAccident === false) {
+      this.clickSounds('leave-mine.mp3');
+    }
     console.log("player " + (this.playerTurnIndex + 1) + " has left the mine");
     this.players[this.playerTurnIndex].leaveMine();
     this.currentPlayer().playerDom.toggleClass("leftMine");
@@ -91,6 +96,7 @@ class Gameboard {
   }
 
   playerAccident(player) {
+    this.clickSounds('accident.mp3');
     player.hasAccident();
     player.playerDom.toggleClass("accident");
     player.returnGems(this.gemMine);
@@ -141,6 +147,11 @@ class Gameboard {
   }
 
   gameOver() {
+    for(var playerIndex = 0; playerIndex < this.players.length; playerIndex++){
+      this.players[playerIndex].totalPoints += this.players[playerIndex].points;
+      this.players[playerIndex].pointsEachRound.push(this.players[playerIndex].points);
+      this.players[playerIndex].updateRoundPoints(this.round);
+    }
     var winner = this.players[0];
     var gameWinner = this.players[0];
     for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
@@ -154,8 +165,6 @@ class Gameboard {
       $('.winningMessage').text('You Win This Round!');
       $('.restart-game').text('Next Round');
     $(".winner").toggleClass("hidden");
-
-    console.log(winner.playerDom.attr("class") + " is the winner!");
     } else {
       for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
         if (this.players[playerIndex].getTotalPoints() > gameWinner.getTotalPoints()) {
@@ -168,15 +177,14 @@ class Gameboard {
       $(".winner").toggleClass("hidden");
       for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
         this.players[playerIndex].totalPoints = 0;
+        this.players[playerIndex].pointsEachRound = [];
+        this.players[playerIndex].domElements.roundPoints.text("");
       }
     }
   }
 
   restartGameClick() {
     for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
-      if(this.round != 5) {
-        this.players[playerIndex].totalPoints += this.players[playerIndex].points;
-      }
       this.players[playerIndex].returnGems(this.gemMine);
       this.updatePlayerGems(this.players[playerIndex], this.typeOfGems);
       this.players[playerIndex].playerDom.removeClass('accident yourTurn leftMine');
@@ -203,6 +211,11 @@ class Gameboard {
 
   hideGemsReceivedModal(){
     this.domElements.gemModal.toggleClass("hidden");
+  }
+
+  clickSounds(fileName) {
+    this.audio = new Audio('audio/' + fileName);
+    this.audio.play();
   }
 
 }
