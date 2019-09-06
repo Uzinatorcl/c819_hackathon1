@@ -141,6 +141,11 @@ class Gameboard {
   }
 
   gameOver() {
+    for(var playerIndex = 0; playerIndex < this.players.length; playerIndex++){
+      this.players[playerIndex].totalPoints += this.players[playerIndex].points;
+      this.players[playerIndex].pointsEachRound.push(this.players[playerIndex].points);
+      this.players[playerIndex].updateRoundPoints(this.round);
+    }
     var winner = this.players[0];
     var gameWinner = this.players[0];
     for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
@@ -154,8 +159,6 @@ class Gameboard {
       $('.winningMessage').text('You Win This Round!');
       $('.restart-game').text('Next Round');
     $(".winner").toggleClass("hidden");
-
-    console.log(winner.playerDom.attr("class") + " is the winner!");
     } else {
       for (var playerIndex = 1; playerIndex < this.players.length; playerIndex++) {
         if (this.players[playerIndex].getTotalPoints() > gameWinner.getTotalPoints()) {
@@ -168,15 +171,14 @@ class Gameboard {
       $(".winner").toggleClass("hidden");
       for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
         this.players[playerIndex].totalPoints = 0;
+        this.players[playerIndex].pointsEachRound = [];
+        this.players[playerIndex].domElements.roundPoints.text("");
       }
     }
   }
 
   restartGameClick() {
     for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
-      if(this.round != 5) {
-        this.players[playerIndex].totalPoints += this.players[playerIndex].points;
-      }
       this.players[playerIndex].returnGems(this.gemMine);
       this.updatePlayerGems(this.players[playerIndex], this.typeOfGems);
       this.players[playerIndex].playerDom.removeClass('accident yourTurn leftMine');
