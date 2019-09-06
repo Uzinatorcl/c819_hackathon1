@@ -11,6 +11,7 @@ class Gameboard {
     this.hideGemsReceivedModal = this.hideGemsReceivedModal.bind(this);
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.round = 0;
+    this.audio;
     this.domElements = {
       gemModal: $(".gemsReceivedContainer"),
       gemModalPlayer: $(".playerMine"),
@@ -58,6 +59,7 @@ class Gameboard {
   }
 
   mineGemClick() {
+    this.clickSounds('mine.mp3');
     console.log("player " + (this.playerTurnIndex + 1) + " is mining for gems");
     var player = this.currentPlayer();
     var gemsMined = player.mine(this.gemMine);
@@ -71,6 +73,9 @@ class Gameboard {
   }
 
   leaveMineClick() {
+    if(this.currentPlayer().hadAccident === false) {
+      this.clickSounds('leave-mine.mp3');
+    }
     console.log("player " + (this.playerTurnIndex + 1) + " has left the mine");
     this.players[this.playerTurnIndex].leaveMine();
     this.currentPlayer().playerDom.toggleClass("leftMine");
@@ -91,6 +96,7 @@ class Gameboard {
   }
 
   playerAccident(player) {
+    this.clickSounds('accident.mp3');
     player.hasAccident();
     player.playerDom.toggleClass("accident");
     player.returnGems(this.gemMine);
@@ -203,6 +209,11 @@ class Gameboard {
 
   hideGemsReceivedModal(){
     this.domElements.gemModal.toggleClass("hidden");
+  }
+
+  clickSounds(fileName) {
+    this.audio = new Audio('audio/' + fileName);
+    this.audio.play();
   }
 
 }
