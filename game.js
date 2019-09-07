@@ -9,6 +9,7 @@ class Gameboard {
     this.restartGameClick = this.restartGameClick.bind(this);
     this.createPlayer = this.createPlayer.bind(this);
     this.hideGemsReceivedModal = this.hideGemsReceivedModal.bind(this);
+    this.muteVolumeClick = this.muteVolumeClick.bind(this)
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.round = 0;
     this.audio;
@@ -16,12 +17,14 @@ class Gameboard {
       gemModal: $(".gemsReceivedContainer"),
       gemModalPlayer: $(".playerMine"),
       gem1: $(".gem1"),
-      gem2: $(".gem2")
+      gem2: $(".gem2"),
+      volumeMute: $('.volumeMute').children()
     }
   }
 
   initializeBoard() {
     this.createMine();
+    this.audio = new Audio;
     $(".buttonContainer").on("click", ".mineGems", this.mineGemClick);
     $(".buttonContainer").on("click", ".leaveMine", this.leaveMineClick);
     $(".rulesButton").on("click", function () { $(".rules").toggleClass("hidden") });
@@ -29,6 +32,7 @@ class Gameboard {
     $(".restart-game").on('click', this.restartGameClick);
     $('.createPlayer').on('click', this.createPlayer);
     $('.playerContainer').on('click', '.player', this.playerClick);
+    $('.volumeMute').on('click', this.muteVolumeClick);
   }
 
   roundChange() {
@@ -214,8 +218,17 @@ class Gameboard {
   }
 
   clickSounds(fileName) {
-    this.audio = new Audio('audio/' + fileName);
+    this.audio.src = ('audio/' + fileName);
     this.audio.play();
+  }
+  muteVolumeClick() {
+    if(this.domElements.volumeMute.text() == 'ON') {
+      this.domElements.volumeMute.text('OFF');
+      this.audio.volume = 0;
+    } else {
+      this.domElements.volumeMute.text('ON');
+      this.audio.volume = 1;
+    }
   }
 
 }
