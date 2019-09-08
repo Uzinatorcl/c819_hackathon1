@@ -1,11 +1,13 @@
 class Player{
   constructor(playerNumber){
     this.playerNumber = playerNumber;
-    this.playerDom = null;
     this.domElements = {
-      container: null,
+      playerDom: null,
+      playerBackgroundFilter: null,
+      dataContainer: null,
       name: null,
       points: null,
+      roundPoints: null,
       gems: {
         topaz: null,
         amethyst: null,
@@ -14,13 +16,13 @@ class Player{
         ruby: null,
         diamond: null,
         obsidian: null
-      },
-      roundPoints: null,
+      }
     }
     this.playerName = "Player " + playerNumber;
     this.points = 0;
     this.totalPoints = 0;
     this.pointsEachRound = [];
+    this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.gems = {
       'topaz': 0,
       'amethyst': 0,
@@ -46,38 +48,39 @@ class Player{
 
   render() {
     var playerContainer = $('.playerContainer');
-    this.playerDom = $('<div>').addClass('player' + this.playerNumber + ' player');
-    var playerNameContainer = $("<div>",{
-      'class':"playerMetaData"
-    });
-    var playerGemScoreBoard = $("<div>",{
-      'class': 'playerGemCounts'
-    })
+    this.domElements.playerBackgroundFilter = $('<div>', {class: 'playerBackgroundFilter'});
+    this.domElements.playerDom = $('<div>',{class: 'player' + this.playerNumber + ' player'});
+    this.domElements.playerDom.append(this.domElements.playerBackgroundFilter);
+    var playerDataContainer = $("<div>",{class: "playerMetaData"});
+    this.domElements.dataContainer = playerDataContainer;
+    var playerNameAndPointsContainer = $('<div>',{class: 'playerNameAndPoints'});
+    var playerNameDom = $("<span>",{class: 'playerName', text: this.playerName});
+    this.domElements.name = playerNameDom;
+    var pointsContainer = $("<span>", {
+      class: 'points',
+      text: ' points: '})
+    var points = $('<span>',{
+      class: 'points',
+      text: '0'});
+    this.domElements.points = points;
+    pointsContainer.append(points);
+    playerNameAndPointsContainer.append(playerNameDom, pointsContainer);
+    var playerGemScoreBoard = $("<div>",{class: "playerGemCounts"});
     for( var gemName in this.gems){
       var gemIcon = $("<span>",{
-        'class': 'gemIcon '+ gemName,
+        class: 'gemIcon '+ gemName,
         html: '&diams;'
       });
       var gemCount = $("<span>",{
-        'class': 'gemCount',
+        class: 'gemCount',
         text: this.gems[gemName]
       })
       this.domElements.gems[gemName] = gemCount;
       gemIcon.append(gemCount);
       playerGemScoreBoard.append(gemIcon)
     }
-    var playerName = $('<p>').addClass('playerName').text(this.playerName);
-    this.domElements.container= this.playerDom;
-    this.domElements.name = playerNameContainer;
-    var pointsContainer = $("<span>",{
-      'class': 'points',
-      text: ' points: '
-    })
-    var points = $('<span>').addClass('points').text('0');
-    this.domElements.points = points;
-    pointsContainer.append(points);
-    playerName.append(pointsContainer);
-    playerNameContainer.append(playerName, playerGemScoreBoard);
+    playerDataContainer.append(playerNameAndPointsContainer, playerGemScoreBoard);
+    this.domElements.playerBackgroundFilter.append(playerDataContainer);
     var gems = $('<p>').addClass('gems').text('Gems');
     var topaz = $('<p>').addClass('topaz').text('Topaz : 0');
     var amethyst = $('<p>').addClass('amethyst').text('Amethyst : 0');
@@ -88,9 +91,8 @@ class Player{
     var obsidian = $('<p>').addClass('obsidian').text('Obsidian : 0');
     var rounds = $('<p>').addClass('roundPoints');
     this.domElements.roundPoints = rounds;
-    this.domElements.container.append(this.domElements.name)
-    this.playerDom.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian, rounds);
-    playerContainer.append(this.domElements.container)
+    this.domElements.playerBackgroundFilter.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian, rounds);
+    playerContainer.append(this.domElements.playerDom)
   }
 
   updateGemCount(gemName){
@@ -98,23 +100,50 @@ class Player{
     this.domElements.gems[gemName].text(this.gems[gemName] );
   }
 
-  mine(mineObject) {
-    var minedGems = mineObject.mineTwoGems();
-    for (var mgIndex = 0; mgIndex < minedGems.length; mgIndex++) {
-      this.updateGemCount(minedGems[mgIndex]);
+  mine(gems) {
+    for (var gemIndex = 0; gemIndex < gems.length; gemIndex++) {
+      this.updateGemCount(gems[gemIndex]);
     }
-    this.pointsConverter(minedGems);
-    this.updateDisplayedPoints();
-    return minedGems;
+    if (this.gems["obsidian"] >= 2){
+      this.hadAccident = true;
+      this.returnGems();
+      this.updateDomToAccident();
+    } else {
+      this.pointsConverter(gems);
+      this.updatePlayerGems(gems);
+    }
+    this.updateDomElements();
+    return this.hadAccident;
   }
 
+  updatePlayerGems(newGems) {
+    for (var gemIndex = 0; gemIndex < newGems.length; gemIndex++) {
+      var gemElement = this.domElements.playerDom.children("." + newGems[gemIndex]);
+      var newGemCount = this.gems[newGems[gemIndex]];
+      gemElement.text(newGems[gemIndex].charAt(0).toUpperCase() + newGems[gemIndex].slice(1) + ": " + newGemCount);
+    }
+  }
 
   leaveMine() {
     this.inMine = false;
+    this.domElements.playerBackgroundFilter.addClass("leftMine");
   }
 
-  hasAccident() {
-    this.hadAccident = true;
+  addClassToPlayerDom(className){
+    this.domElements.playerDom.addClass(className);
+  }
+
+  removeClassFromPlayerDom(className){
+    this.domElements.playerDom.removeClass(className);
+  }
+
+
+  updateDomToAccident(){
+    this.domElements.playerBackgroundFilter.addClass("accident");
+  }
+
+  getAccidentStatus() {
+    return this.hadAccident;
   }
 
   pointsConverter(minedGems) {
@@ -123,15 +152,17 @@ class Player{
     }
   }
 
-  updateDisplayedPoints(){
+  updatePointsAtEndOfRound(round){
+    this.totalPoints += this.points;
+    this.pointsEachRound.push(this.points);
+    this.domElements.roundPoints.text(this.domElements.roundPoints.text() + "R" + round + ": " + this.pointsEachRound[round - 1] + " ");
+  }
+
+  updateDomElements(){
     for( var gem in this.gems){
       this.domElements.gems[gem].text( this.gems[gem]);
     }
     this.domElements.points.text( this.points )
-  }
-
-  updateRoundPoints(round){
-    this.domElements.roundPoints.text(this.domElements.roundPoints.text() + "R" + round + ": " + this.pointsEachRound[round-1] + " ");
   }
 
   getPoints() {
@@ -140,8 +171,14 @@ class Player{
   getTotalPoints() {
     return this.totalPoints;
   }
+  getPlayerName(){
+    return this.playerName;
+  }
+  getPlayerDom(){
+    return this.domElements.playerDom;
+  }
 
-  returnGems(mine) {
+  returnGems() {
     var outputArray = [];
     for (var gem in this.gems) {
       var gemCount = this.gems[gem];
@@ -159,9 +196,25 @@ class Player{
       'diamond': 0,
       'obsidian': 0
     };
-    this.updateDisplayedPoints();
-    mine.returnPlayerGemsToMine(outputArray);
+    this.updateDomElements();
+    this.updatePlayerGems(this.typeOfGems);
+    return outputArray;
+  }
 
+  initializeStatus(){
+    this.inMine = true;
+    this.hadAccident = false;
+  }
+
+  initializeDomClassNames(){
+    this.domElements.playerDom.removeClass('yourTurn');
+    this.domElements.playerBackgroundFilter.removeClass("accident leftMine");
+  }
+
+  initializePoints(){
+    this.points = 0;
+    this.totalPoints = 0;
+    this.domElements.roundPoints.text("");
   }
 
 }
