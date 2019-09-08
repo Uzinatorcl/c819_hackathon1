@@ -29,6 +29,11 @@ button:hover {
   border: 2px solid gold;
   background-color: rgb(139, 0, 0);
 }
+.nextPlayerTurn {
+  width: 40%;
+  text-align: center;
+  margin: 0 auto;
+}
 .roundNumber, .title, .playerTurn {
   display: table-cell;
   width: 32%;
