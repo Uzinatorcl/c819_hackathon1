@@ -11,6 +11,7 @@ class Gameboard {
     this.createPlayer = this.createPlayer.bind(this);
     this.hideGemsReceivedModal = this.hideGemsReceivedModal.bind(this);
     this.muteVolumeClick = this.muteVolumeClick.bind(this)
+    this.hideGemsReceivedModal = this.hideGemsReceivedModal.bind(this);
     this.typeOfGems = ["obsidian", "topaz", "amethyst", "emerald", "sapphire", "ruby", "diamond"];
     this.round = 0;
     this.audio;
@@ -38,6 +39,7 @@ class Gameboard {
     $('.createPlayer').on('click', this.createPlayer);
     $('.playerContainer').on('click', '.player', this.playerExpandClick);
     $('.volumeMute').on('click', this.muteVolumeClick);
+    $('.nextPlayerTurn').on('click', this.hideGemsReceivedModal);
   }
 
   createPlayer(event) {
@@ -85,7 +87,7 @@ class Gameboard {
     this.domElements.gem1.html("&diams; " + gems[0]);
     this.domElements.gem2.attr("class", "gem1 " + gems[1]);
     this.domElements.gem2.html("&diams; " + gems[1]);
-    setTimeout(this.hideGemsReceivedModal, 500);
+    // setTimeout(this.hideGemsReceivedModal, 500);
   }
 
   leaveMineClick() {
