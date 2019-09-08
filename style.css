@@ -221,14 +221,20 @@ footer {
   text-shadow: 5px 5px 5px black;
 }
 
+
 .accident > * {
 color: darkgray;
+background-color: rgba(0,0,0,0.4);
 }
 .accident:before {
   content: 'ACCIDENT';
   font-size: 200%;
   color: red;
   text-shadow: 5px 5px 5px black;
+}
+.accidentBackground {
+   -webkit-filter: contrast(4);
+  filter: contrast(4);
 }
 /* Players modal  */
 .players-modal {

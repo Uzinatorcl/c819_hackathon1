@@ -98,7 +98,7 @@ class Gameboard {
   playerAccident(player) {
     this.clickSounds('accident.mp3');
     player.hasAccident();
-    player.playerDom.toggleClass("accident");
+    player.playerDom.toggleClass("accident accidentBackground");
     player.returnGems(this.gemMine);
     this.updatePlayerGems(player, this.typeOfGems);
     this.leaveMineClick();
@@ -187,7 +187,7 @@ class Gameboard {
     for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
       this.players[playerIndex].returnGems(this.gemMine);
       this.updatePlayerGems(this.players[playerIndex], this.typeOfGems);
-      this.players[playerIndex].playerDom.removeClass('accident yourTurn leftMine');
+      this.players[playerIndex].playerDom.removeClass('accident yourTurn leftMine accidentBackground');
       this.players[playerIndex].inMine = true;
       this.players[playerIndex].hadAccident = false;
     }
