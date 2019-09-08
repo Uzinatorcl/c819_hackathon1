@@ -184,7 +184,7 @@ footer {
   text-shadow: 3px 3px 3px black;
   text-align: center;
 }
-.rules-content, .winner-content, .players-modal-content {
+.rules-content, .winner-content, .players-modal {
   vertical-align: middle;
 }
 
@@ -243,14 +243,14 @@ color: darkgray;
 .players-modal {
   position: fixed;
   z-index: 1;
-  width: 50%;
-  height: 75%;
+  width: 100%;
+  height: 100%;
   overflow: auto;
   background-color: white;
   border: 4px double black;
   margin: 0 auto;
-  left: 25%;
-  top: 15%;
+  left: 0;
+  top: 0;
   color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
