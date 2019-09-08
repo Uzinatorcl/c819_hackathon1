@@ -119,10 +119,15 @@ button:hover {
 .playerName, .gems, .roundPoints, .leaderBoard{
   color:white;
 }
-.points {
+.points, .leader1 {
   color: gold;
 }
-
+.leader2 {
+  color: silver;
+}
+.leader3 {
+  color: brown;
+}
 .topaz {
   color: #ffc87c;
 }

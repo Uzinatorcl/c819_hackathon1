@@ -106,21 +106,21 @@ class Player{
     }
     if (this.gems["obsidian"] >= 2){
       this.hadAccident = true;
-      this.returnGems();
-      this.updateDomToAccident();
+      // this.returnGems();
+      // this.updateDomToAccident();
     } else {
       this.pointsConverter(gems);
       this.updatePlayerGems(gems);
     }
-    this.updateDomElements();
+    // this.updateDomElements();
     return this.hadAccident;
   }
 
   updatePlayerGems(newGems) {
     for (var gemIndex = 0; gemIndex < newGems.length; gemIndex++) {
-      var gemElement = this.domElements.playerDom.children("." + newGems[gemIndex]);
+      var gemElement = this.domElements.playerBackgroundFilter.children("." + newGems[gemIndex]);
       var newGemCount = this.gems[newGems[gemIndex]];
-      gemElement.text(newGems[gemIndex].charAt(0).toUpperCase() + newGems[gemIndex].slice(1) + ": " + newGemCount);
+      gemElement.text(newGems[gemIndex] + ": " + newGemCount);
     }
   }
 
@@ -140,6 +140,7 @@ class Player{
 
   updateDomToAccident(){
     this.domElements.playerBackgroundFilter.addClass("accident");
+    this.updateDomElements();
   }
 
   getAccidentStatus() {
@@ -160,7 +161,7 @@ class Player{
 
   updateDomElements(){
     for( var gem in this.gems){
-      this.domElements.gems[gem].text( this.gems[gem]);
+      this.domElements.gems[gem].text(this.gems[gem]);
     }
     this.domElements.points.text( this.points )
   }

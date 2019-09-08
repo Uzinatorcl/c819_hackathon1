@@ -72,9 +72,10 @@ class Gameboard {
     var player = this.currentPlayer();
     var gemsMined = this.gemMine.mineTwoGems();
     if (player.mine(gemsMined)){
-      this.playerAccident();
+      this.playerAccident(player);
       return;
     }
+    player.updateDomElements();
     this.showGemsReceivedMessage(gemsMined);
     this.currentPlayer().removeClassFromPlayerDom("yourTurn");
     this.nextPlayerTurn();
@@ -95,8 +96,10 @@ class Gameboard {
     this.removePlayerFromMine();
   }
 
-  playerAccident() {
+  playerAccident(player) {
     this.clickSounds('accident.mp3');
+    this.gemMine.returnPlayerGemsToMine(player.returnGems());
+    player.updateDomToAccident();
     this.removePlayerFromMine();
   }
 
