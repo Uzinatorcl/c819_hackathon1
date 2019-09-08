@@ -40,7 +40,7 @@ button:hover {
 }
 
 /* Game Area */
-.player > *, .currentPlayer > *{
+.player > *, .currentPlayer > *, .leaderBoard > *{
   border: 2px solid burlywood;
   background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.5));
   border-radius: 20px;
@@ -111,15 +111,13 @@ button:hover {
 .player.yourTurn, .currentPlayerContainer > .player {
   border: 8px double gold;
 }
-.playerName {
+.playerName, .gems, .roundPoints, .leaderBoard{
   color:white;
 }
 .points {
   color: gold;
 }
-.gems {
-  color: white;
-}
+
 .topaz {
   color: #ffc87c;
 }
@@ -144,9 +142,6 @@ button:hover {
   color: #343637;
     -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: lightgrey;
-}
-.roundPoints {
-  color: white;
 }
 
 /* footer */
@@ -196,9 +191,6 @@ footer {
 }
 
 .gemsReceivedContainer{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   background-image: url("images/gems-received.jpg");
 }
 
@@ -226,16 +218,19 @@ footer {
 color: darkgray;
 background-color: rgba(0,0,0,0.4);
 }
-.accident:before {
+
+.accident::before {
   content: 'ACCIDENT';
   font-size: 200%;
   color: red;
   text-shadow: 5px 5px 5px black;
 }
+
 .accidentBackground {
    -webkit-filter: contrast(4);
   filter: contrast(4);
 }
+
 /* Players modal  */
 .players-modal {
   position: fixed;
@@ -267,11 +262,18 @@ background-color: rgba(0,0,0,0.4);
   font-size: 200%;
 }
 
-
-.playerContainer {
+.leaderBoardContainer, .playerContainer, .gemsReceivedContainer{
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.leaderBoardContainer{
+  height: 50%
+}
+
+
+.playerContainer {
   height: 80vh;
   width: 100%;
   overflow: hidden;
