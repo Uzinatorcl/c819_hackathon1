@@ -3,6 +3,7 @@ class Player{
     this.playerNumber = playerNumber;
     this.domElements = {
       playerDom: null,
+      playerBackgroundFilter: null,
       dataContainer: null,
       name: null,
       points: null,
@@ -47,7 +48,9 @@ class Player{
 
   render() {
     var playerContainer = $('.playerContainer');
+    this.domElements.playerBackgroundFilter = $('<div>', {class: 'playerBackgroundFilter'});
     this.domElements.playerDom = $('<div>',{class: 'player' + this.playerNumber + ' player'});
+    this.domElements.playerDom.append(this.domElements.playerBackgroundFilter);
     var playerDataContainer = $("<div>",{class: "playerMetaData"});
     this.domElements.dataContainer = playerDataContainer;
     var playerNameAndPointsContainer = $('<div>',{class: 'playerNameAndPoints'});
@@ -77,7 +80,7 @@ class Player{
       playerGemScoreBoard.append(gemIcon)
     }
     playerDataContainer.append(playerNameAndPointsContainer, playerGemScoreBoard);
-    this.domElements.playerDom.append(playerDataContainer);
+    this.domElements.playerBackgroundFilter.append(playerDataContainer);
     var gems = $('<p>').addClass('gems').text('Gems');
     var topaz = $('<p>').addClass('topaz').text('Topaz : 0');
     var amethyst = $('<p>').addClass('amethyst').text('Amethyst : 0');
@@ -88,7 +91,7 @@ class Player{
     var obsidian = $('<p>').addClass('obsidian').text('Obsidian : 0');
     var rounds = $('<p>').addClass('roundPoints');
     this.domElements.roundPoints = rounds;
-    this.domElements.playerDom.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian, rounds);
+    this.domElements.playerBackgroundFilter.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian, rounds);
     playerContainer.append(this.domElements.playerDom)
   }
 
@@ -123,11 +126,20 @@ class Player{
 
   leaveMine() {
     this.inMine = false;
-    this.domElements.playerDom.addClass("leftMine");
+    this.domElements.playerBackgroundFilter.addClass("leftMine");
   }
 
+  addClassToPlayerDom(className){
+    this.domElements.playerDom.addClass(className);
+  }
+
+  removeClassFromPlayerDom(className){
+    this.domElements.playerDom.removeClass(className);
+  }
+
+
   updateDomToAccident(){
-    this.domElements.playerDom.addClass("accident accidentBackground");
+    this.domElements.playerBackgroundFilter.addClass("accident");
   }
 
   getAccidentStatus() {
@@ -192,6 +204,11 @@ class Player{
   initializeStatus(){
     this.inMine = true;
     this.hadAccident = false;
+  }
+
+  initializeDomClassNames(){
+    this.domElements.playerDom.removeClass('yourTurn');
+    this.domElements.playerBackgroundFilter.removeClass("accident leftMine");
   }
 
   initializePoints(){

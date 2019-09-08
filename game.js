@@ -32,8 +32,8 @@ class Gameboard {
     this.audio = new Audio;
     $(".buttonContainer").on("click", ".mineGems", this.mineGemClick);
     $(".buttonContainer").on("click", ".leaveMine", this.leaveMineClick);
-    $(".rulesButton").on("click", function () { $(".rules").toggleClass("hidden") });
-    $(".close-rules").on("click", function () { $(".rules").toggleClass("hidden") });
+    $(".rulesButton").on("click", function () { $(".rules").removeClass("hidden") });
+    $(".close-rules").on("click", function () { $(".rules").addClass("hidden") });
     $(".restart-game").on('click', this.restartGameClick);
     $('.createPlayer').on('click', this.createPlayer);
     $('.playerContainer').on('click', '.player', this.playerExpandClick);
@@ -74,7 +74,7 @@ class Gameboard {
       return;
     }
     this.showGemsReceivedMessage(gemsMined);
-    this.currentPlayer().getPlayerDom().removeClass("yourTurn");
+    this.currentPlayer().removeClassFromPlayerDom("yourTurn");
     this.nextPlayerTurn();
   }
 
@@ -95,13 +95,12 @@ class Gameboard {
 
   playerAccident() {
     this.clickSounds('accident.mp3');
-    this.currentPlayer().getPlayerDom().append($("<span>").addClass("accidentShade"));
     this.removePlayerFromMine();
   }
 
   removePlayerFromMine(){
     this.currentPlayer().leaveMine()
-    this.currentPlayer().getPlayerDom().removeClass("yourTurn");
+    this.currentPlayer().removeClassFromPlayerDom("yourTurn");
     this.playersInMine.splice(this.playerTurnIndex, 1);
     if (this.playersInMine.length) {
       this.playerTurnIndex--;
@@ -123,7 +122,7 @@ class Gameboard {
   createAndDisplayCurrentPlayer(){
     this.domElements.playerTurnDom.empty();
     this.currentPlayer().getPlayerDom().clone().appendTo(this.domElements.playerTurnDom);
-    this.currentPlayer().getPlayerDom().addClass("yourTurn");
+    this.currentPlayer().addClassToPlayerDom("yourTurn");
   }
 
   nextPlayerTurn() {
@@ -199,12 +198,12 @@ class Gameboard {
   restartGameClick() {
     for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
       this.gemMine.returnPlayerGemsToMine(this.players[playerIndex].returnGems());
-      this.players[playerIndex].getPlayerDom().removeClass('accident yourTurn leftMine accidentBackground');
+      this.players[playerIndex].initializeDomClassNames();
       this.players[playerIndex].initializeStatus();
       this.playersInMine.push(this.players[playerIndex]);
     }
     this.playerTurnIndex = 0
-    this.playersInMine[0].getPlayerDom().addClass("yourTurn");
+    this.playersInMine[0].addClassToPlayerDom("yourTurn");
     this.roundChange();
     $('.winner').addClass('hidden');
     this.createAndDisplayCurrentPlayer();

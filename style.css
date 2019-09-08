@@ -40,9 +40,9 @@ button:hover {
 }
 
 /* Game Area */
-.player > *, .currentPlayer > *, .leaderBoard > *{
+.playerBackgroundFilter > *, .leaderBoard > *{
   border: 2px solid burlywood;
-  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.5));
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
   border-radius: 20px;
     text-shadow: 2px 2px 2px black;
 }
@@ -213,10 +213,12 @@ footer {
   text-shadow: 5px 5px 5px black;
 }
 
+.accident, .accident > * {
+  background-color: rgb(255, 0, 0, .3);
+}
 
 .accident > * {
 color: darkgray;
-background-color: rgba(0,0,0,0.4);
 }
 
 .accident::before {
@@ -226,10 +228,6 @@ background-color: rgba(0,0,0,0.4);
   text-shadow: 5px 5px 5px black;
 }
 
-.accidentBackground {
-   -webkit-filter: contrast(4);
-  filter: contrast(4);
-}
 
 /* Players modal  */
 .players-modal {
@@ -262,7 +260,7 @@ background-color: rgba(0,0,0,0.4);
   font-size: 200%;
 }
 
-.leaderBoardContainer, .playerContainer, .gemsReceivedContainer{
+.leaderBoardContainer, .player, .playerContainer, .currentPlayerContainer .playerBackgroundFilter, .gemsReceivedContainer{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -280,6 +278,14 @@ background-color: rgba(0,0,0,0.4);
   margin: auto;
 }
 
+.playerBackgroundFilter {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 .player {
   display: flex;
   flex-direction: column;
@@ -291,18 +297,16 @@ background-color: rgba(0,0,0,0.4);
   border: 1px solid black;
 }
 
-.player > p{
+.player p{
   text-transform: capitalize;
   white-space: nowrap;
-  overflow: hidden;
-  flex: 0 0 auto;
 }
 
 .collapsed{
   flex: 0;
 }
 
-.expanded{
+.expanded, .expanded > .playerBackgroundFilter{
   justify-content: center;
   flex: 1;
 }
