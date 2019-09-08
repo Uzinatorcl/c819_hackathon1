@@ -118,7 +118,7 @@ class Player{
 
   updatePlayerGems(newGems) {
     for (var gemIndex = 0; gemIndex < newGems.length; gemIndex++) {
-      var gemElement = this.domElements.playerDom.children("." + newGems[gemIndex]);
+      var gemElement = this.domElements.playerBackgroundFilter.children("." + newGems[gemIndex]);
       var newGemCount = this.gems[newGems[gemIndex]];
       gemElement.text(newGems[gemIndex].charAt(0).toUpperCase() + newGems[gemIndex].slice(1) + ": " + newGemCount);
     }
