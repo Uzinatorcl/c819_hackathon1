@@ -8,7 +8,16 @@ class Player{
       name: null,
       points: null,
       roundPoints: null,
-      gems: {
+      gemIcons: {
+        topaz: null,
+        amethyst: null,
+        emerald: null,
+        sapphire: null,
+        ruby: null,
+        diamond: null,
+        obsidian: null
+      },
+      gemWords:{
         topaz: null,
         amethyst: null,
         emerald: null,
@@ -75,7 +84,7 @@ class Player{
         class: 'gemCount',
         text: this.gems[gemName]
       })
-      this.domElements.gems[gemName] = gemCount;
+      this.domElements.gemIcons[gemName] = gemCount;
       gemIcon.append(gemCount);
       playerGemScoreBoard.append(gemIcon)
     }
@@ -90,43 +99,72 @@ class Player{
     var diamond = $('<p>').addClass('diamond').text('Diamond : 0');
     var obsidian = $('<p>').addClass('obsidian').text('Obsidian : 0');
     var rounds = $('<p>').addClass('roundPoints');
+    this.domElements.gemWords.topaz = topaz;
+    this.domElements.gemWords.amethyst = amethyst;
+    this.domElements.gemWords.emerald = emerald;
+    this.domElements.gemWords.sapphire = sapphire;
+    this.domElements.gemWords.ruby = ruby;
+    this.domElements.gemWords.diamond = diamond;
+    this.domElements.gemWords.obsidian = obsidian;
     this.domElements.roundPoints = rounds;
     this.domElements.playerBackgroundFilter.append(gems, topaz, amethyst,emerald, sapphire, ruby, diamond, obsidian, rounds);
-    playerContainer.append(this.domElements.playerDom)
-  }
-
-  updateGemCount(gemName){
-    this.gems[gemName]++;
-    this.domElements.gems[gemName].text(this.gems[gemName] );
+    playerContainer.append(this.domElements.playerDom);
   }
 
   mine(gems) {
     for (var gemIndex = 0; gemIndex < gems.length; gemIndex++) {
       this.updateGemCount(gems[gemIndex]);
     }
+    this.pointsConverter(gems);
+    this.updatePlayerGemsAndPoints(gems);
     if (this.gems["obsidian"] >= 2){
       this.hadAccident = true;
-      // this.returnGems();
-      // this.updateDomToAccident();
-    } else {
-      this.pointsConverter(gems);
-      this.updatePlayerGems(gems);
     }
-    // this.updateDomElements();
     return this.hadAccident;
   }
 
-  updatePlayerGems(newGems) {
+  updateGemCount(gemName) {
+    this.gems[gemName]++;
+  }
+
+  updatePlayerGemsAndPoints(newGems) {
     for (var gemIndex = 0; gemIndex < newGems.length; gemIndex++) {
-      var gemElement = this.domElements.playerBackgroundFilter.children("." + newGems[gemIndex]);
+      var gemIconElement = this.domElements.gemIcons[newGems[gemIndex]];
+      var gemWordElement = this.domElements.gemWords[newGems[gemIndex]];
       var newGemCount = this.gems[newGems[gemIndex]];
-      gemElement.text(newGems[gemIndex] + ": " + newGemCount);
+      gemIconElement.text(newGemCount);
+      gemWordElement.text(newGems[gemIndex] + ": " + newGemCount);
+      if (newGems.length === 2){
+        var currentPlayerDoms = $(".currentPlayerContainer").find("." + newGems[gemIndex]);
+        var currentPlayerGemIcon = $(currentPlayerDoms[0]);
+        var currentPlayerGemCount = $(currentPlayerDoms[0]).children();
+        var currentPlayerGemWord = $(currentPlayerDoms[1]);
+        currentPlayerGemCount.text(newGemCount);
+        currentPlayerGemWord.text(newGems[gemIndex] + ": " + newGemCount);
+        this.highlightDomElement(gemIconElement);
+        this.highlightDomElement(gemIconElement.parent());
+        this.highlightDomElement(gemWordElement);
+        this.highlightDomElement(currentPlayerGemIcon);
+        this.highlightDomElement(currentPlayerGemCount);
+        this.highlightDomElement(currentPlayerGemWord);
+      }
     }
+    this.domElements.points.text(this.points)
+  }
+
+  highlightDomElement(element){
+    element.addClass("highlight");
+    setTimeout(function(){element.removeClass("highlight")}, 800, element);
   }
 
   leaveMine() {
     this.inMine = false;
     this.domElements.playerBackgroundFilter.addClass("leftMine");
+  }
+
+  updateDomToAccident() {
+    this.domElements.playerBackgroundFilter.addClass("accident");
+    this.updatePlayerGemsAndPoints(this.typeOfGems);
   }
 
   addClassToPlayerDom(className){
@@ -135,12 +173,6 @@ class Player{
 
   removeClassFromPlayerDom(className){
     this.domElements.playerDom.removeClass(className);
-  }
-
-
-  updateDomToAccident(){
-    this.domElements.playerBackgroundFilter.addClass("accident");
-    this.updateDomElements();
   }
 
   getAccidentStatus() {
@@ -157,13 +189,6 @@ class Player{
     this.totalPoints += this.points;
     this.pointsEachRound.push(this.points);
     this.domElements.roundPoints.text(this.domElements.roundPoints.text() + "R" + round + ": " + this.pointsEachRound[round - 1] + " ");
-  }
-
-  updateDomElements(){
-    for( var gem in this.gems){
-      this.domElements.gems[gem].text(this.gems[gem]);
-    }
-    this.domElements.points.text( this.points )
   }
 
   getPoints() {
@@ -197,8 +222,7 @@ class Player{
       'diamond': 0,
       'obsidian': 0
     };
-    this.updateDomElements();
-    this.updatePlayerGems(this.typeOfGems);
+    this.updatePlayerGemsAndPoints(this.typeOfGems);
     return outputArray;
   }
 
