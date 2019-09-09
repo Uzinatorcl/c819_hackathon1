@@ -17,6 +17,7 @@ class Gameboard {
     this.audio;
     this.domElements = {
       roundNumber: $(".roundNumber"),
+      playerTurnName: $(".playerTurn"),
       playerTurnDom: $(".currentPlayerContainer"),
       leaderBoard: $(".leaderBoard"),
       leaderBoardPlayerNames: [],
@@ -75,10 +76,7 @@ class Gameboard {
       this.playerAccident(player);
       return;
     }
-    player.updateDomElements();
     this.showGemsReceivedMessage(gemsMined);
-    this.currentPlayer().removeClassFromPlayerDom("yourTurn");
-    this.nextPlayerTurn();
   }
 
   showGemsReceivedMessage(gems) {
@@ -88,7 +86,6 @@ class Gameboard {
     this.domElements.gem1.html("&diams; " + gems[0]);
     this.domElements.gem2.attr("class", "gem1 " + gems[1]);
     this.domElements.gem2.html("&diams; " + gems[1]);
-    // setTimeout(this.hideGemsReceivedModal, 500);
   }
 
   leaveMineClick() {
@@ -137,7 +134,7 @@ class Gameboard {
       this.playerTurnIndex++;
     }
     var newPlayerTurnText = "Player Turn: " + this.playersInMine[this.playerTurnIndex].getPlayerName();
-    $(".playerTurn").text(newPlayerTurnText);
+    this.domElements.playerTurnName.text(newPlayerTurnText);
     this.createAndDisplayCurrentPlayer();
   }
 
@@ -214,8 +211,16 @@ class Gameboard {
     this.createAndDisplayCurrentPlayer();
   }
 
+  // highlightGemsReceived(gems){
+  //   for (var gemIndex = 0; gemIndex < gems.length; gemIndex++){
+
+  //   }
+  // }
+
   hideGemsReceivedModal(){
     this.domElements.gemModal.addClass("hidden");
+    this.currentPlayer().removeClassFromPlayerDom("yourTurn");
+    this.nextPlayerTurn();
   }
 
   roundChange() {
